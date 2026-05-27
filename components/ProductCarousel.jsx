@@ -2,7 +2,7 @@
 
 import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { useRef } from "react";
-import { whatsappLink } from "@/data/products";
+import { getWhatsappLink } from "@/data/products";
 
 export default function ProductCarousel({ id, title, products = [] }) {
   const scrollRef = useRef(null);
@@ -51,11 +51,11 @@ export default function ProductCarousel({ id, title, products = [] }) {
                 className="group flex min-w-[220px] max-w-[220px] flex-col overflow-hidden rounded-[1.8rem] bg-white shadow-lg ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl"
               >
                 {/* IMAGEN */}
-                <div className="relative flex h-[235px] items-center justify-center overflow-hidden bg-white p-6">
+                <div className="relative flex h-[200px] items-center justify-center overflow-hidden bg-white p-6">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="max-h-[220px] w-auto object-contain transition duration-500 group-hover:scale-105"
+                    className="max-h-[170px] w-auto object-contain transition duration-500 group-hover:scale-105"
                   />
                 </div>
 
@@ -72,33 +72,31 @@ export default function ProductCarousel({ id, title, products = [] }) {
 
                     <div className="mt-4 space-y-2 text-sm">
                       <div className="flex items-center justify-between">
-                        <span className="text-black/50">Unidad</span>
+                        <span className="text-black/50">Precio unidad</span>
                         <span className="font-black text-red-700">
                           {product.unitPrice}
                         </span>
                       </div>
-
-                      <div className="flex items-center justify-between">
-                        <span className="text-black/50">Caja</span>
-                        <span className="font-black text-black">
-                          {product.boxPrice}
-                        </span>
+                      <div className="mt-2 rounded-full bg-yellow-100 px-3 py-2 text-center">
+                        <p className="text-[11px] font-black text-yellow-700">
+                          Consultar precio por caja
+                        </p>
                       </div>
-
-                      <p className="pt-1 text-center text-[11px] font-bold text-yellow-700">
-                        {product.unitsPerBox} unidades por caja
-                      </p>
                     </div>
                   </div>
 
                   <a
-                    href={whatsappLink(product.name)}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(getWhatsappLink(product.name), "_blank");
+                    }}
                     target="_blank"
                     className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-green-500 via-green-500 to-green-600 px-4 py-3 text-sm font-black text-white shadow-lg shadow-green-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-green-500/40"
                   >
                     <MessageCircle className="h-4 w-4" />
 
-                    <span>Cotizar por WhatsApp</span>
+                    <span>Pedir por WhatsApp</span>
                   </a>
                 </div>
               </article>

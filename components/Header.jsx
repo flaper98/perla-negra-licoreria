@@ -2,7 +2,7 @@
 
 import { MessageCircle, Menu, Instagram, Facebook, Music2 } from "lucide-react";
 
-import { whatsappLink } from "@/data/products";
+import { getWhatsappLink } from "@/data/products";
 
 export default function Header() {
   const links = ["Inicio", "Productos", "Categorías", "Ofertas", "Contacto"];
@@ -69,7 +69,7 @@ export default function Header() {
 
           {/* BOTÓN WHATSAPP */}
           <a
-            href={whatsappLink()}
+            href={getWhatsappLink()}
             target="_blank"
             className="hidden rounded-full bg-gradient-to-r from-green-400 to-green-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-green-500/30 transition hover:-translate-y-0.5 hover:shadow-green-500/50 sm:flex"
           >

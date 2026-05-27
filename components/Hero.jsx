@@ -28,7 +28,9 @@ export default function Hero() {
             </h1>
 
             <p className="mb-6 text-base text-white/85 md:text-xl">
-              Whisky, vodka, ron, gin y champagne para negocios.
+              Abastece tu negocio con licores originales, precios mayoristas y
+              atención directa por WhatsApp. ¡Compra fácil y rápido con
+              nosotros!
             </p>
 
             <a

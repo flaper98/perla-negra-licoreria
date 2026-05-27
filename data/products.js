@@ -1,4 +1,7 @@
-export const WHATSAPP_NUMBER = "51934407359";
+export const WHATSAPP_NUMBERS = [
+  "51970820056",
+  "51948778362"
+];
 
 export const categories = [
   "Whisky",
@@ -67,7 +70,27 @@ export const products = [
   { name: "Cartavio Rubio 750ml", category: "Ron", stock: 5, unitsPerBox: 12, boxPrice: "S/ 270.00", unitPrice: "S/ 22.50", image: "/img/products/ron/Cartavio_Rubio_750ml.png", badge: true },
 ];
 
-export function whatsappLink(productName = "catálogo de licores") {
+export function getWhatsappLink(productName = "catálogo de licores") {
   const text = `Hola, quiero comprar el producto: ${productName}`;
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
+  // Evita error en servidor
+  if (typeof window === "undefined") {
+    return `https://wa.me/${WHATSAPP_NUMBERS[0]}?text=${encodeURIComponent(text)}`;
+  }
+
+  const currentIndex = Number(
+    localStorage.getItem("whatsappIndex") || "0"
+  );
+
+  const selectedNumber = WHATSAPP_NUMBERS[currentIndex];
+
+  const nextIndex =
+    (currentIndex + 1) % WHATSAPP_NUMBERS.length;
+
+  localStorage.setItem(
+    "whatsappIndex",
+    String(nextIndex)
+  );
+
+  return `https://wa.me/${selectedNumber}?text=${encodeURIComponent(text)}`;
 }
