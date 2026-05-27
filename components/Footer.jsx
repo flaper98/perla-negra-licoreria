@@ -17,8 +17,12 @@ export default function Footer() {
           <p className="mt-4 text-white/65">WhatsApp: +51970820056</p>
           <p className="mt-4 text-white/65">WhatsApp: +51948778362</p>
 
-          <p className="mt-2 text-white/65">Dirección: Pucallpa, Perú</p>
-          <p className="mt-2 text-white/65">Horario: Lun - Dom</p>
+          <p className="mt-2 text-white/65">
+            Dirección: Jr. Callería 410 Manantay , Pucallpa, Perú
+          </p>
+          <p className="mt-2 text-white/65">
+            Horario de atención: Lunes a Domingo · 24 horas
+          </p>
         </div>
         <div>
           <h4 className="font-black">Redes</h4>
