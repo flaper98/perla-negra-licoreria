@@ -70,10 +70,16 @@ export const products = [
   { name: "Cartavio Rubio 750ml", category: "Ron", stock: 5, unitsPerBox: 12, boxPrice: "S/ 270.00", unitPrice: "S/ 22.50", image: "/img/products/ron/Cartavio_Rubio_750ml.png", badge: true },
 ];
 
-export function getWhatsappLink(productName = "catálogo de licores") {
-  const text = `Hola, quiero comprar el producto: ${productName}`;
+export function getWhatsappLink(productName = null) {
+  let text = "";
 
-  // Evita error en servidor
+  if (!productName) {
+    text =
+      "Hola, quisiera información sobre su catálogo de licores y precios mayoristas.";
+  } else {
+    text = `Hola, quiero comprar el producto: ${productName}`;
+  }
+
   if (typeof window === "undefined") {
     return `https://wa.me/${WHATSAPP_NUMBERS[0]}?text=${encodeURIComponent(text)}`;
   }
