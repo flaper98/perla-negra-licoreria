@@ -14,7 +14,9 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-black">Contacto</h4>
-          <p className="mt-4 text-white/65">WhatsApp: +51 934 407 359</p>
+          <p className="mt-4 text-white/65">WhatsApp: +51970820056</p>
+          <p className="mt-4 text-white/65">WhatsApp: +51948778362</p>
+
           <p className="mt-2 text-white/65">Dirección: Pucallpa, Perú</p>
           <p className="mt-2 text-white/65">Horario: Lun - Dom</p>
         </div>

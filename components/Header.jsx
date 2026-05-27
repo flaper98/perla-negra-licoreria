@@ -9,7 +9,7 @@ export default function Header() {
 
   return (
     <header className="fixed left-0 top-6 z-50 w-full px-6">
-      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-yellow-400/15 bg-black/50 px-6 py-3 shadow-2xl shadow-black/50 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-yellow-500/20 bg-[#0b0b0b]/85 px-6 py-3 shadow-[0_10px_40px_rgba(255,191,0,0.08)] shadow-black/50 backdrop-blur-2xl">
         {/* LOGO */}
         <a href="#inicio" className="flex items-center gap-4">
           <img src="/img/logo.png" alt="Perla Negra" className="h-10 w-auto" />
@@ -19,7 +19,7 @@ export default function Header() {
               Perla Negra
             </p>
 
-            <p className="text-[11px] uppercase tracking-[0.28em] text-yellow-400">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-[#d4a017]">
               Licores Mayoristas
             </p>
           </div>
