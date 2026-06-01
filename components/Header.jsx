@@ -3,64 +3,80 @@
 import {
   MessageCircle,
   Menu,
+  X,
   Instagram,
   Facebook,
   Music2,
   Search,
+  Wine,
+  Flame,
+  ShieldCheck,
+  Truck,
+  BadgePercent,
 } from "lucide-react";
 import { getWhatsappLink } from "@/data/products";
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (!search.trim()) return;
-    window.location.href = `/buscar?q=${encodeURIComponent(search.trim())}`;
+
+    const query = search.trim();
+    if (!query) return;
+
+    setMenuOpen(false);
+    router.push(`/buscar?q=${encodeURIComponent(query)}`);
   };
 
   const links = [
-    { name: "Inicio", href: "/" },
-    { name: "Ofertas", href: "/#ofertas" },
-    { name: "Whisky", href: "/categoria/whisky" },
-    { name: "Ron", href: "/categoria/ron" },
-    { name: "Vodka", href: "/categoria/vodka" },
-    { name: "Gin", href: "/categoria/gin" },
-    { name: "Vinos", href: "/categoria/vinos" },
-    { name: "Champagne", href: "/categoria/champagne" },
-    { name: "Tequila", href: "/categoria/tequila" },
-    { name: "Pisco", href: "/categoria/pisco" },
-    { name: "Energizantes", href: "/categoria/energizantes" },
-    { name: "Licores", href: "/categoria/licores" },
+    { name: "Inicio", href: "/", icon: Flame },
+    { name: "Ofertas", href: "/#ofertas", icon: BadgePercent },
+    { name: "Whisky", href: "/categoria/whisky", icon: Wine },
+    { name: "Ron", href: "/categoria/ron", icon: Wine },
+    { name: "Vodka", href: "/categoria/vodka", icon: Wine },
+    { name: "Gin", href: "/categoria/gin", icon: Wine },
+    { name: "Vinos", href: "/categoria/vinos", icon: Wine },
+    { name: "Champagne", href: "/categoria/champagne", icon: Wine },
+    { name: "Tequila", href: "/categoria/tequila", icon: Wine },
+    { name: "Pisco", href: "/categoria/pisco", icon: Wine },
+    { name: "Energizantes", href: "/categoria/energizantes", icon: Flame },
+    { name: "Licores", href: "/categoria/licores", icon: Wine },
   ];
 
   return (
-    <header className="fixed left-0 top-4 z-50 w-full px-4">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-yellow-500/15 bg-[#0b0b0b]/80 shadow-[0_8px_28px_rgba(0,0,0,0.35)] backdrop-blur-2xl">
-        <div className="flex items-center justify-between gap-5 px-5 py-1.5">
-          <a href="/" className="flex min-w-[220px] items-center gap-3">
+    <header className="fixed left-0 top-4 z-50 w-full px-3 sm:px-4">
+      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] border border-yellow-500/30 bg-[#080706]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
+        <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
+          <Link href="/" className="flex min-w-0 items-center gap-3">
             <img
               src="/img/logo.png"
               alt="Perla Negra"
-              className="h-11 w-auto"
+              className="h-12 w-12 rounded-full border border-yellow-500/30 bg-white object-contain p-1"
             />
-            <div>
-              <p className="text-lg font-black text-white">Perla Negra</p>
-              <p className="text-[10px] uppercase tracking-[0.25em] text-[#d4a017]">
+            <div className="min-w-0">
+              <p className="truncate text-xl font-black text-white">
+                Perla Negra
+              </p>
+              <p className="truncate text-[10px] uppercase tracking-[0.28em] text-yellow-500">
                 Licores Mayoristas
               </p>
             </div>
-          </a>
+          </Link>
 
           <form onSubmit={handleSearch} className="hidden flex-1 lg:flex">
-            <div className="flex w-full items-center rounded-full bg-white px-4 py-2">
+            <div className="flex w-full items-center rounded-full border border-yellow-500/20 bg-white/95 px-4 py-2.5">
               <Search className="mr-2 h-4 w-4 text-black/40" />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Buscar whisky, ron, vodka..."
-                className="w-full text-sm text-black outline-none"
+                className="w-full bg-transparent text-sm text-black outline-none"
               />
             </div>
           </form>
@@ -88,33 +104,107 @@ export default function Header() {
             <a
               href={getWhatsappLink()}
               target="_blank"
-              className="ml-2 inline-flex rounded-full bg-gradient-to-r from-green-500 to-green-600 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-green-500/30 hover:bg-green-400"
+              rel="noopener noreferrer"
+              className="ml-2 inline-flex rounded-full bg-green-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-green-500/25 hover:bg-green-400"
             >
               <MessageCircle className="mr-2 h-4 w-4" />
               WhatsApp
             </a>
           </div>
 
-          <button className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-white lg:hidden">
-            <Menu className="h-5 w-5" />
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yellow-500/40 bg-black text-yellow-400 shadow-lg lg:hidden"
+            aria-label="Abrir menú"
+          >
+            {menuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
+
         <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
-        <nav className="hidden border-t border-yellow-500/20 lg:flex">
-          <div className="flex w-full items-center justify-center gap-8 px-8 py-3">
+
+        <nav className="hidden border-t border-yellow-500/15 lg:flex">
+          <div className="flex w-full items-center justify-center gap-7 px-8 py-3">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="group relative text-sm font-semibold tracking-normal text-white/80 transition hover:text-yellow-400"
+                className="text-sm font-bold text-white/80 hover:text-yellow-400"
               >
                 {link.name}
-
-                <span className="absolute -bottom-3 left-0 h-[3px] w-0 rounded-full bg-yellow-400 transition-all duration-300 group-hover:w-full" />
-              </a>
+              </Link>
             ))}
           </div>
         </nav>
+
+        {menuOpen && (
+          <div className="bg-[radial-gradient(circle_at_top,rgba(212,160,23,0.18),transparent_35%),#090806] px-4 pb-5 pt-4 lg:hidden">
+            <form onSubmit={handleSearch} className="mb-5">
+              <div className="flex items-center rounded-2xl border border-yellow-500/30 bg-white px-4 py-3">
+                <Search className="mr-2 h-5 w-5 text-black/40" />
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Buscar productos..."
+                  className="w-full text-sm text-black outline-none"
+                />
+              </div>
+            </form>
+
+            <p className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-wide text-yellow-400">
+              <Wine className="h-4 w-4" />
+              Categorías
+            </p>
+
+            <nav className="grid grid-cols-2 gap-3">
+              {links.map((link) => {
+                const Icon = link.icon;
+
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center gap-2 rounded-2xl border border-yellow-500/20 bg-white/[0.07] px-4 py-3 font-black text-white shadow-inner hover:border-yellow-400 hover:bg-yellow-500/10"
+                  >
+                    <Icon className="h-4 w-4 text-yellow-400" />
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <a
+              href={getWhatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 flex items-center justify-center rounded-2xl bg-green-500 px-5 py-4 text-lg font-black text-white shadow-lg shadow-green-500/30"
+            >
+              <MessageCircle className="mr-2 h-6 w-6" />
+              Pedir por WhatsApp
+            </a>
+
+            <div className="mt-5 grid grid-cols-3 gap-2 text-center text-[11px] text-white/70">
+              <div className="rounded-2xl bg-white/5 p-3">
+                <ShieldCheck className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
+                Originales
+              </div>
+              <div className="rounded-2xl bg-white/5 p-3">
+                <Truck className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
+                Envíos
+              </div>
+              <div className="rounded-2xl bg-white/5 p-3">
+                <BadgePercent className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
+                Mayorista
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
