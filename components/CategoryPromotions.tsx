@@ -68,11 +68,13 @@ export default function CategoryPromotions() {
                   className="group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1"
                 >
                   <div className="relative h-52 overflow-hidden bg-black">
-<img
-  src={category.image}
-  alt={product}
-  className="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-110"
-/>
+                    
+                          <img
+                              src={category.image}
+                              alt={product}
+                              className="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-110"
+                          />  
+                          
 
                     <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-yellow-400 px-3 py-2 text-xs font-black text-black">
                       <Flame className="h-4 w-4" />
