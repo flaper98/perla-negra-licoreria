@@ -53,7 +53,23 @@ export default function Header() {
     <header className="fixed left-0 top-4 z-50 w-full px-3 sm:px-4">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] border border-yellow-500/30 bg-[#080706]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
         <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <Link href="/" className="flex min-w-0 items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yellow-500/40 bg-black text-yellow-400 shadow-lg lg:hidden"
+            aria-label="Abrir menú"
+          >
+            {menuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+
+          <Link
+            href="/"
+            className="flex min-w-0 flex-1 items-center gap-3 lg:flex-none"
+          >
             <img
               src="/img/logo.png"
               alt="Perla Negra"
@@ -111,19 +127,6 @@ export default function Header() {
               WhatsApp
             </a>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yellow-500/40 bg-black text-yellow-400 shadow-lg lg:hidden"
-            aria-label="Abrir menú"
-          >
-            {menuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
