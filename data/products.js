@@ -12,7 +12,7 @@ export const categories = [
   "Vinos",
   "Champagne",
   "Pisco",
-  "Energizante",
+  "Energizantes",
   "Licores"
 ];
 
@@ -59,7 +59,7 @@ export const products = [
   { name: "Barceló Añejo 750ml", category: "Ron", stock: 5, unitsPerBox: 12, boxPrice: "S/ 440.60", unitPrice: "S/ 36.70", image: "/img/products/ron/Barceló_Añejo_750ml.png", badge: true },
   { name: "Ron Flor de Caña 12 Años 750ml", category: "Ron", stock: 12, unitsPerBox: 1, boxPrice: "S/ 97.20", unitPrice: "S/ 97.20", image: "/img/products/ron/Ron_Flor_de_Caña_12_Años_750ml.png", badge: true },
   { name: "Tequila Jose Cuervo 750ml", category: "Tequila", stock: 2, unitsPerBox: 12, boxPrice: "S/ 680.40", unitPrice: "S/ 56.70", image: "/img/products/tequila/Tequila_Jose_Cuervo_750ml.png", badge: true },
-  { name: "Red Bull 250ml", category: "Energizante", stock: 4, unitsPerBox: 24, boxPrice: "S/ 142.60", unitPrice: "S/ 5.90", image: "/img/products/energizantes/Red_Bull_250ml.png", badge: true },
+  { name: "Red Bull 250ml", category: "Energizantes", stock: 4, unitsPerBox: 24, boxPrice: "S/ 142.60", unitPrice: "S/ 5.90", image: "/img/products/energizantes/Red_Bull_250ml.png", badge: true },
   { name: "Smirnoff Ice Green Apple Bite 355ml", category: "Vodka", stock: 10, unitsPerBox: 24, boxPrice: "S/ 151.20", unitPrice: "S/ 6.30", image: "/img/products/vodka/Smirnoff_Ice_Green_Apple_Bite_355ml.png", badge: true },
   { name: "Ballantines 750ml", category: "Whisky", stock: 2, unitsPerBox: 12, boxPrice: "S/ 421.20", unitPrice: "S/ 35.10", image: "/img/products/whisky/Ballantines_750ml.png", badge: true },
   { name: "Something Special 750ml", category: "Whisky", stock: 2, unitsPerBox: 12, boxPrice: "S/ 440.60", unitPrice: "S/ 36.70", image: "/img/products/whisky/Something_Special_750ml.png", badge: true },
@@ -70,33 +70,26 @@ export const products = [
   { name: "Cartavio Rubio 750ml", category: "Ron", stock: 5, unitsPerBox: 12, boxPrice: "S/ 270.00", unitPrice: "S/ 22.50", image: "/img/products/ron/Cartavio_Rubio_750ml.png", badge: true },
 ];
 
-export function getWhatsappLink(productName = null) {
+export function getWhatsappLink(value = null, options = {}) {
   let text = "";
 
-  if (!productName) {
-    text =
-      "Hola, quisiera información sobre su catálogo de licores y precios mayoristas.";
+  if (!value) {
+    text = "Hola, quisiera información sobre su catálogo de licores y precios mayoristas.";
+  } else if (options.customMessage) {
+    text = value;
   } else {
-    text = `Hola, quiero comprar el producto: ${productName}`;
+    text = `Hola, quiero comprar el producto: ${value}`;
   }
 
   if (typeof window === "undefined") {
     return `https://wa.me/${WHATSAPP_NUMBERS[0]}?text=${encodeURIComponent(text)}`;
   }
 
-  const currentIndex = Number(
-    localStorage.getItem("whatsappIndex") || "0"
-  );
-
+  const currentIndex = Number(localStorage.getItem("whatsappIndex") || "0");
   const selectedNumber = WHATSAPP_NUMBERS[currentIndex];
 
-  const nextIndex =
-    (currentIndex + 1) % WHATSAPP_NUMBERS.length;
-
-  localStorage.setItem(
-    "whatsappIndex",
-    String(nextIndex)
-  );
+  const nextIndex = (currentIndex + 1) % WHATSAPP_NUMBERS.length;
+  localStorage.setItem("whatsappIndex", String(nextIndex));
 
   return `https://wa.me/${selectedNumber}?text=${encodeURIComponent(text)}`;
 }

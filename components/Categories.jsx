@@ -42,7 +42,7 @@ const categories = [
   },
   {
     name: "Vinos",
-    slug: "vino",
+    slug: "vinos",
     img: "/img/categorias/vino.jpg",
     tag: "Especiales",
   },
@@ -54,7 +54,7 @@ const categories = [
   },
   {
     name: "Energizantes",
-    slug: "energizante",
+    slug: "energizantes",
     img: "/img/categorias/energizante.jpg",
     tag: "Ofertas",
   },
@@ -109,7 +109,7 @@ export default function Categories() {
             {categories.map((cat) => (
               <a
                 key={cat.name}
-                href={`#${cat.slug}`}
+                href={`/categoria/${cat.slug}`}
                 className="group relative min-w-[220px] overflow-hidden rounded-[1.5rem] bg-black shadow-lg"
               >
                 <div className="relative h-36 overflow-hidden">
