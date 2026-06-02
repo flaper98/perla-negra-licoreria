@@ -1,112 +1,115 @@
 "use client";
 
-import { MessageCircle, Flame, Eye } from "lucide-react";
+import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { getWhatsappLink } from "@/data/products";
-
-const categories = [
-  {
-    name: "Whisky",
-    image: "/img/categorias/whisky.jpg",
-    subtitle: "Whiskies premium y promociones por unidad o caja.",
-    products: [
-      "Johnnie Walker Red Label",
-      "Black Label",
-      "Chivas Regal",
-      "Old Parr",
-    ],
-  },
-  {
-    name: "Ron",
-    image: "/img/categorias/ron.jpg",
-    subtitle: "Rones para consumo personal y eventos.",
-    products: [
-      "Ron Cartavio",
-      "Ron Flor de Caña",
-      "Ron Barceló",
-      "Havana Club",
-    ],
-  },
-  {
-    name: "Vodka",
-    image: "/img/categorias/vodka.jpg",
-    subtitle: "Vodkas clásicos y premium.",
-    products: [
-      "Smirnoff",
-      "Absolut",
-      "Skyy Vodka",
-      "Vodka Russkaya",
-    ],
-  },
-];
+import { promotions } from "@/data/promotions";
+import { useRef } from "react";
 
 export default function CategoryPromotions() {
+  const categories = [...new Set(promotions.map((p) => p.category))];
+  const scrollRefs = useRef({});
+
+  const move = (category, direction) => {
+    scrollRefs.current[category]?.scrollBy({
+      left: direction === "right" ? 900 : -900,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <section className="bg-[#f4efe4] px-6 py-14">
+    <section id="ofertas" className="bg-[#f4efe4] px-6 py-14">
       <div className="mx-auto max-w-[1700px] space-y-14">
-        {categories.map((category) => (
-          <div key={category.name} id={category.name.toLowerCase()}>
-            <div className="mb-6 flex items-end justify-between gap-4">
-              <div>
+        {categories.map((category) => {
+          const items = promotions.filter((p) => p.category === category);
+
+          return (
+            <div key={category} id={category.toLowerCase()}>
+              <div className="mb-6">
                 <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-700">
-                  Categoría
+                  Promociones
                 </p>
+
                 <h2 className="mt-2 text-3xl font-black text-black md:text-4xl">
-                  {category.name} en promoción
+                  Promos de {category}
                 </h2>
-                <p className="mt-2 text-black/60">{category.subtitle}</p>
+
+                <p className="mt-2 text-black/60">
+                  Packs y ofertas disponibles por WhatsApp.
+                </p>
               </div>
 
-              <button className="hidden rounded-full bg-black px-5 py-3 text-sm font-black text-white transition hover:bg-yellow-500 hover:text-black md:inline-flex">
-                Ver más
-              </button>
-            </div>
-
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {category.products.map((product, index) => (
-                <article
-                  key={product}
-                  className="group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1"
+              <div className="relative">
+                <button
+                  onClick={() => move(category, "left")}
+                  className="absolute -left-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black text-yellow-300 shadow-xl transition hover:scale-110"
                 >
-                  <div className="relative h-52 overflow-hidden bg-black">
-                    
-                          <img
-                              src={category.image}
-                              alt={product}
-                              className="h-full w-full object-cover opacity-85 transition duration-500 group-hover:scale-110"
-                          />  
-                          
+                  <ChevronLeft />
+                </button>
 
-                    <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-yellow-400 px-3 py-2 text-xs font-black text-black">
-                      <Flame className="h-4 w-4" />
-                      {index === 0 ? "Oferta" : "Premium"}
-                    </div>
-                  </div>
+                <div
+                  ref={(el) => {
+                    scrollRefs.current[category] = el;
+                  }}
+                  className="flex gap-5 overflow-x-auto scroll-smooth px-2 pb-6 [scrollbar-width:none]"
+                >
+                  {items.map((promo) => {
+                    const isHorizontal = promo.layout === "horizontal";
 
-                  <div className="p-5">
-                    <h3 className="text-xl font-black text-black">{product}</h3>
-                    <p className="mt-2 text-sm text-black/60">
-                      Precio especial por unidad o caja. Consulta disponibilidad.
-                    </p>
-
-                    <div className="mt-4 flex gap-3">
-                      <button
-                        onClick={() => window.open(getWhatsappLink(product), "_blank")}
-                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-2xl bg-green-500 px-4 py-3 text-sm font-black text-white transition hover:bg-green-400"
+                    return (
+                      <article
+                        key={promo.name}
+                        className={`group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl ${
+                          isHorizontal
+                            ? "min-w-[520px] max-w-[520px]"
+                            : "min-w-[340px] max-w-[340px]"
+                        }`}
                       >
-                        <MessageCircle className="h-4 w-4" />
-                        WhatsApp
-                      </button>
+                        <div
+                          className={`relative flex items-center justify-center overflow-hidden bg-black ${
+                            isHorizontal ? "h-[416px]" : "h-[425px]"
+                          }`}
+                        >
+                          <img
+                            src={promo.image}
+                            alt={promo.name}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
 
-                      <button className="inline-flex items-center justify-center rounded-2xl bg-black px-4 py-3 text-white transition hover:bg-yellow-500 hover:text-black">
-                        <Eye className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                </article>
-              ))}
+                        <div className="flex items-center justify-between gap-3 p-4">
+                          <div className="min-w-0">
+                            <h3 className="truncate text-base font-black text-black">
+                              {promo.name}
+                            </h3>
+                            <p className="text-xs text-black/50">
+                              Pack mayorista disponible
+                            </p>
+                          </div>
+
+                          <button
+                            onClick={() =>
+                              window.open(getWhatsappLink(promo.name), "_blank")
+                            }
+                            className="shrink-0 rounded-full bg-green-500 px-4 py-2 text-xs font-black text-white transition hover:bg-green-400"
+                          >
+                            Consultar
+                          </button>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+
+                <button
+                  onClick={() => move(category, "right")}
+                  className="absolute -right-4 top-1/2 z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black text-yellow-300 shadow-xl transition hover:scale-110"
+                >
+                  <ChevronRight />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
