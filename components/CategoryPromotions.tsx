@@ -10,8 +10,24 @@ export default function CategoryPromotions() {
   const scrollRefs = useRef({});
 
   const move = (category, direction) => {
-    scrollRefs.current[category]?.scrollBy({
-      left: direction === "right" ? 500 : -500,
+    const container = scrollRefs.current[category];
+
+    if (!container) return;
+
+    const maxScroll =
+      container.scrollWidth - container.clientWidth;
+
+    const currentScroll = container.scrollLeft;
+
+    const amount = 900;
+
+    const nextPosition =
+      direction === "right"
+        ? Math.min(currentScroll + amount, maxScroll)
+        : Math.max(currentScroll - amount, 0);
+
+    container.scrollTo({
+      left: nextPosition,
       behavior: "smooth",
     });
   };
@@ -20,7 +36,9 @@ export default function CategoryPromotions() {
     <section id="ofertas" className="bg-[#f4efe4] px-6 py-14">
       <div className="mx-auto max-w-[1700px] space-y-14">
         {categories.map((category) => {
-          const items = promotions.filter((p) => p.category === category);
+          const items = promotions.filter(
+            (p) => p.category === category
+          );
 
           return (
             <div key={category} id={category.toLowerCase()}>
@@ -50,24 +68,60 @@ export default function CategoryPromotions() {
                   ref={(el) => {
                     scrollRefs.current[category] = el;
                   }}
-                  className="flex gap-5 overflow-x-auto scroll-smooth px-2 pb-6 [scrollbar-width:none]"
+                  className="
+                    flex
+                    gap-5
+                    overflow-x-auto
+                    scroll-smooth
+                    snap-x
+                    snap-mandatory
+                    px-2
+                    pb-6
+                    [scrollbar-width:none]
+                    [-ms-overflow-style:none]
+                    [&::-webkit-scrollbar]:hidden
+                  "
                 >
                   {items.map((promo) => {
-                    const isHorizontal = promo.layout === "horizontal";
+                    const isHorizontal =
+                      promo.layout === "horizontal";
 
                     return (
                       <article
                         key={promo.name}
-                        className={`group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl ${
-                          isHorizontal
-                            ? "min-w-[520px] max-w-[520px]"
-                            : "min-w-[340px] max-w-[340px]"
-                        }`}
+                        className={`
+                          snap-start
+                          group
+                          overflow-hidden
+                          rounded-[1.8rem]
+                          bg-white
+                          shadow-xl
+                          ring-1
+                          ring-black/5
+                          transition
+                          hover:-translate-y-1
+                          hover:shadow-2xl
+                          ${
+                            isHorizontal
+                              ? "min-w-[520px] max-w-[520px]"
+                              : "min-w-[340px] max-w-[340px]"
+                          }
+                        `}
                       >
                         <div
-                          className={`relative flex items-center justify-center overflow-hidden bg-black ${
-                            isHorizontal ? "h-[416px]" : "h-[425px]"
-                          }`}
+                          className={`
+                            relative
+                            flex
+                            items-center
+                            justify-center
+                            overflow-hidden
+                            bg-black
+                            ${
+                              isHorizontal
+                                ? "h-[416px]"
+                                : "h-[425px]"
+                            }
+                          `}
                         >
                           <img
                             src={promo.image}
@@ -81,6 +135,7 @@ export default function CategoryPromotions() {
                             <h3 className="truncate text-base font-black text-black">
                               {promo.name}
                             </h3>
+
                             <p className="text-xs text-black/50">
                               Pack mayorista disponible
                             </p>
@@ -88,7 +143,10 @@ export default function CategoryPromotions() {
 
                           <button
                             onClick={() =>
-                              window.open(getWhatsappLink(promo.name), "_blank")
+                              window.open(
+                                getWhatsappLink(promo.name),
+                                "_blank"
+                              )
                             }
                             className="shrink-0 rounded-full bg-green-500 px-4 py-2 text-xs font-black text-white transition hover:bg-green-400"
                           >
