@@ -11,7 +11,7 @@ export default function CategoryPromotions() {
 
   const move = (category, direction) => {
     scrollRefs.current[category]?.scrollBy({
-      left: direction === "right" ? 900 : -900,
+      left: direction === "right" ? 500 : -500,
       behavior: "smooth",
     });
   };
