@@ -49,6 +49,13 @@ export default function Header() {
     { name: "Licores", href: "/categoria/licores", icon: Wine },
   ];
 
+  const socials = {
+    instagram:
+      "https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn",
+    facebook: "https://facebook.com",
+    tiktok: "https://tiktok.com",
+  };
+
   return (
     <header className="fixed left-0 top-4 z-50 w-full px-3 sm:px-4">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] border border-yellow-500/30 bg-[#080706]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
@@ -99,20 +106,26 @@ export default function Header() {
 
           <div className="hidden items-center gap-2 lg:flex">
             <a
-              href="https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn"
-              className="rounded-full bg-white/5 p-2 text-white/70 hover:text-yellow-400"
+              href={socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-pink-400"
             >
               <Instagram className="h-4 w-4" />
             </a>
             <a
-              href="#"
-              className="rounded-full bg-white/5 p-2 text-white/70 hover:text-yellow-400"
+              href={socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-blue-400"
             >
               <Facebook className="h-4 w-4" />
             </a>
             <a
-              href="#"
-              className="rounded-full bg-white/5 p-2 text-white/70 hover:text-yellow-400"
+              href={socials.tiktok}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-yellow-400"
             >
               <Music2 className="h-4 w-4" />
             </a>
