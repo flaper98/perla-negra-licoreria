@@ -19,7 +19,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default function Header() {
+export default function Header({ hideMenu = false }) {
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
@@ -143,21 +143,21 @@ export default function Header() {
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
-
-        <nav className="hidden border-t border-yellow-500/15 lg:flex">
-          <div className="flex w-full items-center justify-center gap-7 px-8 py-3">
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-bold text-white/80 hover:text-yellow-400"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-        </nav>
-
+        {!hideMenu && (
+          <nav className="hidden border-t border-yellow-500/15 lg:flex">
+            <div className="flex w-full items-center justify-center gap-7 px-8 py-3">
+              {links.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-bold text-white/80 hover:text-yellow-400"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
         {menuOpen && (
           <div className="bg-[radial-gradient(circle_at_top,rgba(212,160,23,0.18),transparent_35%),#090806] px-4 pb-5 pt-4 lg:hidden">
             <form onSubmit={handleSearch} className="mb-5">
