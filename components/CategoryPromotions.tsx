@@ -4,27 +4,33 @@ import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { getWhatsappLink } from "@/data/products";
 import { promotions } from "@/data/promotions";
 import { useRef } from "react";
+import { useCity } from "@/app/hooks/useCity";
 
 export default function CategoryPromotions() {
-  const categories = [...new Set(promotions.map((p) => p.category))];
   const scrollRefs = useRef({});
+  const city = useCity();
+
+  if (!city) return null;
+
+  const filteredPromotions = promotions.filter(
+    (p) => p.city?.toLowerCase() === city.toLowerCase()
+  );
+
+  const categories = [
+    ...new Set(filteredPromotions.map((p) => p.category)),
+  ];
 
   const move = (category, direction) => {
     const container = scrollRefs.current[category];
-
     if (!container) return;
 
-    const maxScroll =
-      container.scrollWidth - container.clientWidth;
-
-    const currentScroll = container.scrollLeft;
-
+    const maxScroll = container.scrollWidth - container.clientWidth;
     const amount = 900;
 
     const nextPosition =
       direction === "right"
-        ? Math.min(currentScroll + amount, maxScroll)
-        : Math.max(currentScroll - amount, 0);
+        ? Math.min(container.scrollLeft + amount, maxScroll)
+        : Math.max(container.scrollLeft - amount, 0);
 
     container.scrollTo({
       left: nextPosition,
@@ -32,11 +38,13 @@ export default function CategoryPromotions() {
     });
   };
 
+  if (!categories.length) return null;
+
   return (
     <section id="ofertas" className="bg-[#f4efe4] px-6 py-14">
       <div className="mx-auto max-w-[1700px] space-y-14">
         {categories.map((category) => {
-          const items = promotions.filter(
+          const items = filteredPromotions.filter(
             (p) => p.category === category
           );
 
@@ -44,7 +52,7 @@ export default function CategoryPromotions() {
             <div key={category} id={category.toLowerCase()}>
               <div className="mb-6">
                 <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-700">
-                  Promociones
+                  Promociones para {city}
                 </p>
 
                 <h2 className="mt-2 text-3xl font-black text-black md:text-4xl">
@@ -68,60 +76,24 @@ export default function CategoryPromotions() {
                   ref={(el) => {
                     scrollRefs.current[category] = el;
                   }}
-                  className="
-                    flex
-                    gap-5
-                    overflow-x-auto
-                    scroll-smooth
-                    snap-x
-                    snap-mandatory
-                    px-2
-                    pb-6
-                    [scrollbar-width:none]
-                    [-ms-overflow-style:none]
-                    [&::-webkit-scrollbar]:hidden
-                  "
+                  className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 pb-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
                 >
                   {items.map((promo) => {
-                    const isHorizontal =
-                      promo.layout === "horizontal";
+                    const isHorizontal = promo.layout === "horizontal";
 
                     return (
                       <article
                         key={promo.name}
-                        className={`
-                          snap-start
-                          group
-                          overflow-hidden
-                          rounded-[1.8rem]
-                          bg-white
-                          shadow-xl
-                          ring-1
-                          ring-black/5
-                          transition
-                          hover:-translate-y-1
-                          hover:shadow-2xl
-                          ${
-                            isHorizontal
-                              ? "min-w-[520px] max-w-[520px]"
-                              : "min-w-[340px] max-w-[340px]"
-                          }
-                        `}
+                        className={`snap-start group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl ${
+                          isHorizontal
+                            ? "min-w-[520px] max-w-[520px]"
+                            : "min-w-[340px] max-w-[340px]"
+                        }`}
                       >
                         <div
-                          className={`
-                            relative
-                            flex
-                            items-center
-                            justify-center
-                            overflow-hidden
-                            bg-black
-                            ${
-                              isHorizontal
-                                ? "h-[416px]"
-                                : "h-[425px]"
-                            }
-                          `}
+                          className={`relative flex items-center justify-center overflow-hidden bg-black ${
+                            isHorizontal ? "h-[416px]" : "h-[425px]"
+                          }`}
                         >
                           <img
                             src={promo.image}
@@ -143,10 +115,7 @@ export default function CategoryPromotions() {
 
                           <button
                             onClick={() =>
-                              window.open(
-                                getWhatsappLink(promo.name),
-                                "_blank"
-                              )
+                              window.open(getWhatsappLink(promo.name), "_blank")
                             }
                             className="shrink-0 rounded-full bg-green-500 px-4 py-2 text-xs font-black text-white transition hover:bg-green-400"
                           >
