@@ -2,22 +2,22 @@
 
 import { MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { getWhatsappLink } from "@/data/products";
-import { promotions } from "@/data/promotions";
+import { promotions as promotionProvincia } from "@/data/promotions";
+import { promotionLima } from "@/data/promotion_lima";
 import { useRef } from "react";
-import { useCity } from "@/app/hooks/useCity";
+import { useRegion } from "@/app/hooks/useRegion";
 
 export default function CategoryPromotions() {
   const scrollRefs = useRef({});
-  const city = useCity();
+  const region = useRegion();
 
-  if (!city) return null;
+  if (!region) return null;
 
-  const filteredPromotions = promotions.filter(
-    (p) => p.city?.toLowerCase() === city.toLowerCase()
-  );
+  const activePromotions =
+    region === "Lima" ? promotionLima : promotionProvincia;
 
   const categories = [
-    ...new Set(filteredPromotions.map((p) => p.category)),
+    ...new Set(activePromotions.map((p) => p.category)),
   ];
 
   const move = (category, direction) => {
@@ -38,13 +38,11 @@ export default function CategoryPromotions() {
     });
   };
 
-  if (!categories.length) return null;
-
   return (
     <section id="ofertas" className="bg-[#f4efe4] px-6 py-14">
       <div className="mx-auto max-w-[1700px] space-y-14">
         {categories.map((category) => {
-          const items = filteredPromotions.filter(
+          const items = activePromotions.filter(
             (p) => p.category === category
           );
 
@@ -52,11 +50,13 @@ export default function CategoryPromotions() {
             <div key={category} id={category.toLowerCase()}>
               <div className="mb-6">
                 <p className="text-xs font-black uppercase tracking-[0.3em] text-yellow-700">
-                  Promociones para {city}
+                  Promociones para {region}
                 </p>
 
                 <h2 className="mt-2 text-3xl font-black text-black md:text-4xl">
-                  Promos de {category}
+                  {region === "Lima"
+                    ? "Promociones Lima"
+                    : `Promos de ${category}`}
                 </h2>
 
                 <p className="mt-2 text-black/60">
@@ -83,13 +83,13 @@ export default function CategoryPromotions() {
 
                     return (
                       <article
-                        key={promo.name}
-                        className={`snap-start group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl ${
-                          isHorizontal
-                            ? "min-w-[520px] max-w-[520px]"
-                            : "min-w-[340px] max-w-[340px]"
-                        }`}
-                      >
+                          key={`${promo.category}-${promo.name}-${promo.image}`}
+                          className={`snap-start group overflow-hidden rounded-[1.8rem] bg-white shadow-xl ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl ${
+                            isHorizontal
+                              ? "min-w-[520px] max-w-[520px]"
+                              : "min-w-[340px] max-w-[340px]"
+                          }`}
+                        >
                         <div
                           className={`relative flex items-center justify-center overflow-hidden bg-black ${
                             isHorizontal ? "h-[416px]" : "h-[425px]"
@@ -98,6 +98,7 @@ export default function CategoryPromotions() {
                           <img
                             src={promo.image}
                             alt={promo.name}
+                            loading="lazy"
                             className="h-full w-full object-cover"
                           />
                         </div>
@@ -115,7 +116,10 @@ export default function CategoryPromotions() {
 
                           <button
                             onClick={() =>
-                              window.open(getWhatsappLink(promo.name), "_blank")
+                              window.open(
+                                getWhatsappLink(promo.name),
+                                "_blank"
+                              )
                             }
                             className="shrink-0 rounded-full bg-green-500 px-4 py-2 text-xs font-black text-white transition hover:bg-green-400"
                           >
