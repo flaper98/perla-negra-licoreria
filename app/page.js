@@ -7,38 +7,26 @@ import Benefits from "@/components/Benefits";
 import Footer from "@/components/Footer";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp";
 import CategoryPromotions from "@/components/CategoryPromotions";
-import { useCity } from "@/app/hooks/useCity";
+import { useRegion } from "@/app/hooks/useRegion";
 
 export default function Home() {
-  const city = useCity();
+  const region = useRegion();
 
-  if (!city) return null;
+  if (!region) return null;
 
-  const isLima = city === "Lima";
+  const isProvincia = region === "Provincia";
 
   return (
     <main>
-      {isLima ? (
-        <>
-          <Header hideMenu={true}/>
-          <Hero />
-          <CategoryPromotions />
-          <FloatingWhatsapp />
-          <Benefits />
-          <Footer />
-          <FloatingWhatsapp />
-        </>
-      ) : (
-        <>
-          <Header />
-          <Hero />
-          <CategoryPromotions />
-          <Categories />
-          <Benefits />
-          <Footer />
-          <FloatingWhatsapp />
-        </>
-      )}
+      <Header hideMenu={!isProvincia} />
+      <Hero />
+      <CategoryPromotions />
+
+      {isProvincia && <Categories />}
+
+      <Benefits />
+      <Footer />
+      <FloatingWhatsapp />
     </main>
   );
 }
