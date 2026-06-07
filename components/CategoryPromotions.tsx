@@ -66,7 +66,7 @@ export default function CategoryPromotions() {
 
     <div>
       <p className="text-xs font-black uppercase tracking-[0.28em] text-yellow-400">
-        Ubicación detectada
+        Ubicación
       </p>
       <p className="text-lg font-black text-white">
         Promociones para {region}
