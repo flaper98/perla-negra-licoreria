@@ -33,7 +33,7 @@ export const products = [
   { name: "Ricadonna Rubi 750ml", category: "Champagne", unitPrice: "S/ 55.00", image: "/img/products/champagne/Ricadonna_Rubi_750ml.png", badge: true },
   //GIN
   { name: "Beefeater Pink Strawberry 700ml", category: "Gin", unitPrice: "S/ 73.40", image: "/img/products/gin/Beefeater_Pink_Strawberry_700ml.png", badge: true },
-  { name: "Tanqueray London 700ml", category: "Gin", unitPrice: "S/ 81.00", image: "/img/products/gin/Tanqueray_London_700ml.png", badge: true },
+  { name: "Tanqueray London 700ml", category: "Gin", unitPrice: "S/ 71.00", image: "/img/products/gin/Tanqueray_London_700ml.png", badge: true },
   // WHISKY
   { name: "Jack Daniels 750ml", category: "Whisky", unitPrice: "S/ 93.00", image: "/img/products/whisky/Jack_Daniels_Black_750ml.png", badge: true },
   { name: "Jack Daniels Apple 750ml", category: "Whisky", unitPrice: "S/ 93.00", image: "/img/products/whisky/Jack_Daniels_Apple_750ml.png", badge: true },
