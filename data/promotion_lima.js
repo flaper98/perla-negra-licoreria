@@ -1,4 +1,4 @@
-export const promotionLima = Array.from({ length: 62 }, (_, index) => ({
+export const promotionLima = Array.from({ length: 58 }, (_, index) => ({
   id: index + 1,
   name: `Promo Lima ${index + 1}`,
   category: "Lima",
