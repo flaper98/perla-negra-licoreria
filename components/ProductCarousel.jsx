@@ -48,10 +48,10 @@ export default function ProductCarousel({ id, title, products = [] }) {
             {products.map((product) => (
               <article
                 key={product.name}
-                className="group flex min-w-[220px] max-w-[220px] flex-col overflow-hidden rounded-[1.8rem] bg-white shadow-lg ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-2xl"
+                className="group flex min-w-[220px] max-w-[220px] flex-col overflow-hidden rounded-[1.8rem] bg-white shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
               >
                 {/* IMAGEN */}
-                <div className="relative flex h-[200px] items-center justify-center overflow-hidden bg-white p-6">
+                <div className="relative flex h-[200px] items-center justify-center overflow-hidden bg-gradient-to-b from-slate-100 to-white p-6">
                   <img
                     src={product.image}
                     alt={product.name}

@@ -66,8 +66,6 @@ export const products = [
   // TEQUILA
   { name: "Tequila Jose Cuervo 750ml", category: "Tequila", unitPrice: "S/ 56.70", image: "/img/products/tequila/Tequila_Jose_Cuervo_750ml.png", badge: true },
   { name: "1800 Tequila Reserva 750ml", category: "Tequila", unitPrice: "S/ 97.20", image: "/img/products/tequila/1800_Tequila_Reserva_750ml.png", badge: true },
-  { name: "Tequila Don Julio Reposado 750ml", category: "Tequila", unitPrice: "S/ 210.00", image: "/img/products/tequila/Tequila_Don_Julio_Reposado_750ml.png", badge: true },
-  { name: "Tequila Jose Cuervo Blanco 750ml", category: "Tequila", unitPrice: "S/ 56.70", image: "/img/products/tequila/Tequila_Jose_Cuervo_Blanco_750ml.png", badge: true },
 
   //ENERGIZANTES
     { name: "Red Bull 250ml", category: "Energizantes", unitPrice: "S/ 7.00", image: "/img/products/energizantes/Red_Bull_250ml.png", badge: true },

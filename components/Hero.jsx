@@ -32,13 +32,6 @@ export default function Hero() {
               atención directa por WhatsApp. ¡Compra fácil y rápido con
               nosotros!
             </p>
-
-            <a
-              href="#productos"
-              className="inline-flex rounded-full bg-yellow-400 px-8 py-4 font-black text-black transition hover:scale-105"
-            >
-              Ver productos
-            </a>
           </div>
         </div>
       </div>
