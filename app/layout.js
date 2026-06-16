@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -72,6 +73,7 @@ export default function RootLayout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
+        <Analytics />
       </body>
     </html>
   );
