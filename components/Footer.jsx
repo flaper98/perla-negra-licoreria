@@ -7,15 +7,13 @@ import {
   MapPin,
   Clock,
   Phone,
-  Music2,
   ShieldCheck,
 } from "lucide-react";
 import { getWhatsappLink } from "@/data/products";
 
 const SOCIALS = {
   instagram: "https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn",
-  facebook: "https://facebook.com",
-  tiktok: "https://tiktok.com",
+  facebook: "https://www.facebook.com/PerlaNegra.Distribuidor",
 };
 
 const CATEGORIES = [
@@ -83,15 +81,6 @@ export default function Footer() {
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/60 transition hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-400"
               >
                 <Facebook className="h-4 w-4" />
-              </a>
-              <a
-                href={SOCIALS.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="TikTok"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/60 transition hover:border-yellow-500/50 hover:bg-yellow-500/10 hover:text-yellow-400"
-              >
-                <Music2 className="h-4 w-4" />
               </a>
               <a
                 href={getWhatsappLink()}

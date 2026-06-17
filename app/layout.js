@@ -32,11 +32,20 @@ export const metadata = {
     siteName: "Perla Negra",
     type: "website",
     locale: "es_PE",
+    images: [
+      {
+        url: `${BASE_URL}/img/hero-desktop.png`,
+        width: 2560,
+        height: 1440,
+        alt: "Perla Negra — Licores Mayoristas en Perú",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Perla Negra | Licores Mayoristas en Perú",
     description: DESCRIPTION,
+    images: [`${BASE_URL}/img/hero-desktop.png`],
   },
 };
 

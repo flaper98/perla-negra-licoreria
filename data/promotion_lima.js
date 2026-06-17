@@ -2,6 +2,7 @@ export const promotionLima = [
   {
     id: 1,
     name: "Pack 7 Whiskies Premium JW + Chivas Regal + Jack Daniel's Lima S/1100",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/1.png",
     layout: "vertical",
@@ -9,6 +10,7 @@ export const promotionLima = [
   {
     id: 2,
     name: "JW Black Label + Chivas Regal 12 Años Mayorista 12 botellas Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/2.png",
     layout: "vertical",
@@ -16,6 +18,7 @@ export const promotionLima = [
   {
     id: 3,
     name: "Riccadonna Asti + Flor de Caña 7 Años Mayorista 12 botellas Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/3.png",
     layout: "vertical",
@@ -23,6 +26,7 @@ export const promotionLima = [
   {
     id: 4,
     name: "Jose Cuervo Reposado + Jägermeister Mayorista 12 botellas Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/4.png",
     layout: "vertical",
@@ -30,6 +34,7 @@ export const promotionLima = [
   {
     id: 5,
     name: "Baileys Original + Old Parr 12 Años Mayorista 12 botellas Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/5.png",
     layout: "vertical",
@@ -37,6 +42,7 @@ export const promotionLima = [
   {
     id: 6,
     name: "Absolut Vodka Mayorista 12x750ml Lima S/400",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/6.png",
     layout: "vertical",
@@ -44,6 +50,7 @@ export const promotionLima = [
   {
     id: 7,
     name: "JW Red Label Mayorista 12x750ml Lima S/390",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/7.png",
     layout: "vertical",
@@ -51,6 +58,7 @@ export const promotionLima = [
   {
     id: 8,
     name: "Flor de Caña 4 Años + Flor de Caña 5 Años Mayorista 12 botellas Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/8.png",
     layout: "vertical",
@@ -58,6 +66,7 @@ export const promotionLima = [
   {
     id: 9,
     name: "Smirnoff Vodka Rojo y Verde Mayorista 12x700ml Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/9.png",
     layout: "vertical",
@@ -65,13 +74,23 @@ export const promotionLima = [
   {
     id: 10,
     name: "Santiago Queirolo Quebranta y Acholado Pisco Mayorista 12x750ml Lima",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/10.png",
     layout: "vertical",
   },
   {
+    id: 54,
+    name: "JW Black Label + JW Double Black — 2 botellas Lima S/150",
+    group: "jw",
+    category: "Lima",
+    image: "/img/promotion/Lima/54.png",
+    layout: "vertical",
+  },
+  {
     id: 11,
     name: "JW Green Label + Chivas Regal 18 Gold Signature — 2 botellas Lima S/275",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/11.png",
     layout: "vertical",
@@ -79,6 +98,7 @@ export const promotionLima = [
   {
     id: 12,
     name: "JW Green Label Edición Exclusiva — 2 botellas Lima S/270",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/12.png",
     layout: "vertical",
@@ -86,6 +106,7 @@ export const promotionLima = [
   {
     id: 13,
     name: "JW Black Label + Double Black + Gold Label Reserve — 3 botellas Lima S/260",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/13.png",
     layout: "vertical",
@@ -93,6 +114,7 @@ export const promotionLima = [
   {
     id: 14,
     name: "JW Gold Label Reserve + JW Green Label — 2 botellas Lima S/260",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/14.png",
     layout: "vertical",
@@ -100,6 +122,7 @@ export const promotionLima = [
   {
     id: 15,
     name: "Pack 12 JW Gold Label Reserve + Black Label Lima S/910",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/15.png",
     layout: "vertical",
@@ -107,6 +130,7 @@ export const promotionLima = [
   {
     id: 16,
     name: "Pack 6 JW Red, Black, Double Black, Green, Gold Reserve y Blue Label Lima S/890",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/16.png",
     layout: "vertical",
@@ -114,6 +138,7 @@ export const promotionLima = [
   {
     id: 17,
     name: "JW Green Label + JW 18 Años + JW Blue Label — 3 botellas Lima S/750",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/17.png",
     layout: "vertical",
@@ -121,6 +146,7 @@ export const promotionLima = [
   {
     id: 18,
     name: "JW 18 Años + JW Green Label + Chivas Regal 18 — 3 botellas Lima S/465",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/18.png",
     layout: "vertical",
@@ -128,6 +154,7 @@ export const promotionLima = [
   {
     id: 19,
     name: "Royal Salute 21 Años Blended Scotch Whisky Lima S/445",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/19.png",
     layout: "vertical",
@@ -135,6 +162,7 @@ export const promotionLima = [
   {
     id: 20,
     name: "Don Julio Reposado Tequila — 3 botellas Lima S/420",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/20.png",
     layout: "vertical",
@@ -142,6 +170,7 @@ export const promotionLima = [
   {
     id: 21,
     name: "Ron Zacapa XO Premium — 2 botellas Lima S/420",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/21.png",
     layout: "vertical",
@@ -149,6 +178,7 @@ export const promotionLima = [
   {
     id: 22,
     name: "Chivas Regal 18 Ultis Blended Scotch Whisky Lima S/400",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/22.png",
     layout: "vertical",
@@ -156,6 +186,7 @@ export const promotionLima = [
   {
     id: 23,
     name: "JW XR 21 Años Whisky Premium Lima S/400",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/23.png",
     layout: "vertical",
@@ -163,6 +194,7 @@ export const promotionLima = [
   {
     id: 24,
     name: "Pack Mixto 8 botellas Pisco Queirolo + Flor de Caña + JW Black Label + Jose Cuervo + Absolut Lima S/310",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/24.png",
     layout: "vertical",
@@ -170,6 +202,7 @@ export const promotionLima = [
   {
     id: 25,
     name: "JW Black Label Pack 5 botellas Lima S/300",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/25.png",
     layout: "vertical",
@@ -177,6 +210,7 @@ export const promotionLima = [
   {
     id: 26,
     name: "Chivas Regal 18 Gold Signature — 2 botellas Lima S/290",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/26.png",
     layout: "vertical",
@@ -184,6 +218,7 @@ export const promotionLima = [
   {
     id: 27,
     name: "Tequila 1800 Reposado + JW Gold Reserve + JW Black Label — 3 botellas Lima S/280",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/27.png",
     layout: "vertical",
@@ -191,6 +226,7 @@ export const promotionLima = [
   {
     id: 28,
     name: "Flor de Caña Añejo Oro + Jose Cuervo + JW Red Label + JW Black Label — 4 botellas Lima S/185",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/28.png",
     layout: "vertical",
@@ -198,6 +234,7 @@ export const promotionLima = [
   {
     id: 29,
     name: "JW Gold Label Reserve + JW Black Label — 2 botellas Lima S/185",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/29.png",
     layout: "vertical",
@@ -205,6 +242,7 @@ export const promotionLima = [
   {
     id: 30,
     name: "Chivas Regal 12 Años x2 + Jägermeister — 3 botellas Lima S/185",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/30.png",
     layout: "vertical",
@@ -212,6 +250,7 @@ export const promotionLima = [
   {
     id: 31,
     name: "JW Black Label x2 + Jose Cuervo Especial — 3 botellas Lima S/180",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/31.png",
     layout: "vertical",
@@ -219,6 +258,7 @@ export const promotionLima = [
   {
     id: 32,
     name: "JW Black Label x2 + Jägermeister + Jose Cuervo + Absolut Vodka — 5 botellas Lima S/250",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/32.png",
     layout: "vertical",
@@ -226,6 +266,7 @@ export const promotionLima = [
   {
     id: 33,
     name: "JW Gold Reserve + Black Label + Jägermeister + Jose Cuervo + Absolut — 5 botellas Lima S/250",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/33.png",
     layout: "vertical",
@@ -233,6 +274,7 @@ export const promotionLima = [
   {
     id: 34,
     name: "JW Gold Label Reserve + JW Black Label + Jägermeister — 3 botellas Lima S/235",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/34.png",
     layout: "vertical",
@@ -240,6 +282,7 @@ export const promotionLima = [
   {
     id: 35,
     name: "JW Gold Label Reserve — 2 botellas Lima S/230",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/35.png",
     layout: "vertical",
@@ -247,6 +290,7 @@ export const promotionLima = [
   {
     id: 36,
     name: "Jack Daniel's + JW Double Black + Tequila 1800 Reposado — 3 botellas Lima S/240",
+    group: "jack",
     category: "Lima",
     image: "/img/promotion/Lima/36.png",
     layout: "vertical",
@@ -254,6 +298,7 @@ export const promotionLima = [
   {
     id: 37,
     name: "Jack Daniel's Tennessee Honey — 3 botellas Lima S/240",
+    group: "jack",
     category: "Lima",
     image: "/img/promotion/Lima/37.png",
     layout: "vertical",
@@ -261,6 +306,7 @@ export const promotionLima = [
   {
     id: 38,
     name: "JW Double Black Pack — 3 botellas Lima S/240",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/38.png",
     layout: "vertical",
@@ -268,6 +314,7 @@ export const promotionLima = [
   {
     id: 39,
     name: "Jack Daniel's Old No.7 + Tennessee Honey + Apple — 3 botellas Lima S/240",
+    group: "jack",
     category: "Lima",
     image: "/img/promotion/Lima/39.png",
     layout: "vertical",
@@ -275,6 +322,7 @@ export const promotionLima = [
   {
     id: 40,
     name: "Tequila 1800 Reposado Pack — 3 botellas Lima S/230",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/40.png",
     layout: "vertical",
@@ -282,6 +330,7 @@ export const promotionLima = [
   {
     id: 41,
     name: "Tequila 1800 Reposado + Pisco Portón + Flor de Caña 12 Años — 3 botellas Lima S/220",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/41.png",
     layout: "vertical",
@@ -289,6 +338,7 @@ export const promotionLima = [
   {
     id: 42,
     name: "Flor de Caña 12 Años Pack — 3 botellas Lima S/210",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/42.png",
     layout: "vertical",
@@ -296,6 +346,7 @@ export const promotionLima = [
   {
     id: 43,
     name: "JW Gold Reserve + JW Black Label + Jose Cuervo Especial — 3 botellas Lima S/220",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/43.png",
     layout: "vertical",
@@ -303,6 +354,7 @@ export const promotionLima = [
   {
     id: 44,
     name: "JW Red Label Pack 6 botellas Lima S/210",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/44.png",
     layout: "vertical",
@@ -310,6 +362,7 @@ export const promotionLima = [
   {
     id: 45,
     name: "JW Gold Label Reserve + JW Black Label + JW Red Label — 3 botellas Lima S/210",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/45.png",
     layout: "vertical",
@@ -317,6 +370,7 @@ export const promotionLima = [
   {
     id: 46,
     name: "Chivas Regal 18 Años + Chivas Regal 12 Años — 2 botellas Lima S/200",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/46.png",
     layout: "vertical",
@@ -324,6 +378,7 @@ export const promotionLima = [
   {
     id: 47,
     name: "JW Gold Label Reserve + Tequila 1800 Reposado — 2 botellas Lima S/200",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/47.png",
     layout: "vertical",
@@ -331,6 +386,7 @@ export const promotionLima = [
   {
     id: 48,
     name: "JW Gold Label Reserve + JW Black Label — 2 botellas Lima S/200",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/48.png",
     layout: "vertical",
@@ -338,6 +394,7 @@ export const promotionLima = [
   {
     id: 49,
     name: "Old Parr 12 Años Blended Scotch Whisky Pack — 3 botellas Lima S/190",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/49.png",
     layout: "vertical",
@@ -345,6 +402,7 @@ export const promotionLima = [
   {
     id: 50,
     name: "Chivas Regal 12 Años Pack — 3 botellas Lima S/190",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/50.png",
     layout: "vertical",
@@ -352,6 +410,7 @@ export const promotionLima = [
   {
     id: 51,
     name: "JW Black Label Pack — 3 botellas Lima S/185",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/51.png",
     layout: "vertical",
@@ -359,6 +418,7 @@ export const promotionLima = [
   {
     id: 52,
     name: "JW Red Label x2 + JW Black Label x2 — 4 botellas Lima S/190",
+    group: "jw",
     category: "Lima",
     image: "/img/promotion/Lima/52.png",
     layout: "vertical",
@@ -366,20 +426,15 @@ export const promotionLima = [
   {
     id: 53,
     name: "JW Gold Label Reserve + Jägermeister — 2 botellas Lima S/175",
+    group: "combinados",
     category: "Lima",
     image: "/img/promotion/Lima/53.png",
     layout: "vertical",
   },
   {
-    id: 54,
-    name: "JW Black Label + JW Double Black — 2 botellas Lima S/150",
-    category: "Lima",
-    image: "/img/promotion/Lima/54.png",
-    layout: "vertical",
-  },
-  {
     id: 55,
     name: "Jose Cuervo Especial Pack — 3 botellas Lima S/145",
+    group: "otros",
     category: "Lima",
     image: "/img/promotion/Lima/55.png",
     layout: "vertical",
@@ -387,6 +442,7 @@ export const promotionLima = [
   {
     id: 56,
     name: "JW King George V Whisky Premium Lima — S/1300 | Pack King George V + Blue Label S/1700",
+    group: "premium",
     category: "Lima",
     image: "/img/promotion/Lima/56.png",
     layout: "vertical",
@@ -394,6 +450,7 @@ export const promotionLima = [
   {
     id: 57,
     name: "Jack Daniel's Honey + Jack Daniel's Negro + Tequila 1800 Mayorista 12x750ml Lima S/840 c/u",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/57.png",
     layout: "vertical",
@@ -401,6 +458,7 @@ export const promotionLima = [
   {
     id: 58,
     name: "JW Double Black Mayorista 12x750ml Lima S/850 | JW Swing 12x750ml Lima S/950",
+    group: "mayorista",
     category: "Lima",
     image: "/img/promotion/Lima/58.png",
     layout: "vertical",

@@ -11,9 +11,7 @@ import { useRegion } from "@/app/hooks/useRegion";
 
 export default function Home() {
   const region = useRegion();
-
   if (!region) return null;
-
   const isProvincia = region === "Provincia";
 
   return (

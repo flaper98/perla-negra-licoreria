@@ -82,15 +82,31 @@ export const products = [
   { name: "Ron Flor de Caña Clásico 5 Años", category: "Ron", unitPrice: "S/ 55.00", image: "/img/products/ron/Ron_Flor_de_Caña_Clásico_5_Años.png", badge: true },
   { name: "Flor de Caña 7 Años", category: "Ron", unitPrice: "S/ 70.00", image: "/img/products/ron/Flor_de_Caña_7_Años.png", badge: true }];
 
+function getRegion() {
+  if (typeof window === "undefined") return "Provincia";
+  try {
+    const raw = localStorage.getItem("region_v2");
+    if (!raw) return "Provincia";
+    return JSON.parse(raw).value || "Provincia";
+  } catch {
+    return "Provincia";
+  }
+}
+
 export function getWhatsappLink(value = null, options = {}) {
+  const isLima = getRegion() === "Lima";
   let text = "";
 
-  if (!value) {
-    text = "Hola, quisiera información sobre su catálogo de licores y precios mayoristas.";
-  } else if (options.customMessage) {
+  if (options.customMessage) {
     text = value;
+  } else if (!value) {
+    text = isLima
+      ? "Hola, me interesa su catálogo de licores mayoristas. ¿Tienen stock disponible para Lima?"
+      : "Hola, quisiera información sobre su catálogo de licores y precios mayoristas. ¿Realizan envíos a provincia?";
   } else {
-    text = `Hola, quiero comprar el producto: ${value}`;
+    text = isLima
+      ? `Hola, quiero consultar el producto: *${value}*. ¿Tienen disponible para entrega en Lima?`
+      : `Hola, quiero consultar el producto: *${value}*. ¿Pueden coordinar el envío a mi ciudad?`;
   }
 
   if (typeof window === "undefined") {
@@ -99,7 +115,6 @@ export function getWhatsappLink(value = null, options = {}) {
 
   const currentIndex = Number(localStorage.getItem("whatsappIndex") || "0");
   const selectedNumber = WHATSAPP_NUMBERS[currentIndex];
-
   const nextIndex = (currentIndex + 1) % WHATSAPP_NUMBERS.length;
   localStorage.setItem("whatsappIndex", String(nextIndex));
 

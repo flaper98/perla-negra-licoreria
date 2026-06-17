@@ -5,7 +5,21 @@ import { getWhatsappLink } from "@/data/products";
 import { promotions as promotionProvincia } from "@/data/promotions";
 import { promotionLima } from "@/data/promotion_lima";
 import { useRef } from "react";
-import { useRegion } from "@/app/hooks/useRegion";
+import { useRegion, setRegionCache } from "@/app/hooks/useRegion";
+
+const URGENCY = [
+  { text: "¡Stock limitado!", color: "text-red-500" },
+  { text: "Oferta válida esta semana", color: "text-orange-500" },
+  { text: "Últimas unidades disponibles", color: "text-red-500" },
+  { text: "Precio especial por WhatsApp", color: "text-green-600" },
+  { text: "Solo quedan pocas cajas", color: "text-orange-500" },
+  { text: "Precio mayorista hoy", color: "text-amber-600" },
+];
+
+function urgencyFor(name: string) {
+  const hash = name.split("").reduce((acc, ch) => acc + ch.charCodeAt(0), 0);
+  return URGENCY[hash % URGENCY.length];
+}
 
 export default function CategoryPromotions() {
   const scrollRefs = useRef({});
@@ -13,19 +27,29 @@ export default function CategoryPromotions() {
 
   if (!region) return null;
 
-  const changeRegion = (newRegion) => {
-    localStorage.setItem("region", newRegion);
+  const changeRegion = (newRegion: string) => {
+    setRegionCache(newRegion, true);
     window.location.reload();
   };
 
-  const limaGroups = Array.from(
-    { length: Math.ceil(promotionLima.length / 6) },
-    (_, index) => ({
-      category: `Lima-${index + 1}`,
-      title: `Promociones Lima ${index + 1}`,
-      items: promotionLima.slice(index * 6, (index + 1) * 6),
-    })
-  );
+  const LIMA_GROUP_TITLES: Record<string, string> = {
+    mayorista:  "Packs Mayoristas · 12 Botellas",
+    jw:         "Colección Johnnie Walker",
+    premium:    "Whiskies & Licores Exclusivos",
+    combinados: "Packs Combinados Lima",
+    jack:       "Colección Jack Daniel's",
+    otros:      "Ron, Tequila & Vodka",
+  };
+
+  const LIMA_GROUP_ORDER = ["jw", "mayorista", "combinados", "jack", "premium", "otros"];
+
+  const limaGroups = LIMA_GROUP_ORDER
+    .map((group) => ({
+      category: `Lima-${group}`,
+      title: LIMA_GROUP_TITLES[group],
+      items: promotionLima.filter((p: any) => p.group === group),
+    }))
+    .filter((g) => g.items.length > 0);
 
   const provinciaGroups = [
     ...new Set(promotionProvincia.map((p) => p.category)),
@@ -131,6 +155,7 @@ export default function CategoryPromotions() {
               >
                 {group.items.map((promo) => {
                   const isHorizontal = promo.layout === "horizontal";
+                  const urgency = urgencyFor(promo.name);
 
                   return (
                     <article
@@ -160,8 +185,9 @@ export default function CategoryPromotions() {
                             {promo.name}
                           </h3>
 
-                          <p className="text-xs text-black/50">
-                            Pack mayorista disponible
+                          <p className={`flex items-center gap-1 text-xs font-bold ${urgency.color}`}>
+                            <span className={`inline-block h-1.5 w-1.5 rounded-full ${urgency.color.replace("text-", "bg-")}`} />
+                            {urgency.text}
                           </p>
                         </div>
 

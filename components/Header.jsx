@@ -6,7 +6,6 @@ import {
   X,
   Instagram,
   Facebook,
-  Music2,
   Search,
   Wine,
   Flame,
@@ -52,8 +51,7 @@ export default function Header({ hideMenu = false }) {
   const socials = {
     instagram:
       "https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn",
-    facebook: "https://facebook.com",
-    tiktok: "https://tiktok.com",
+    facebook: "https://www.facebook.com/PerlaNegra.Distribuidor",
   };
 
   return (
@@ -121,15 +119,6 @@ export default function Header({ hideMenu = false }) {
             >
               <Facebook className="h-4 w-4" />
             </a>
-            <a
-              href={socials.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-yellow-400"
-            >
-              <Music2 className="h-4 w-4" />
-            </a>
-
             <a
               href={getWhatsappLink()}
               target="_blank"
