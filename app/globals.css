@@ -105,7 +105,7 @@ header{position:sticky; top:0; z-index:100; background:rgba(238,242,249,0.85); b
 .hero-stage .ring{position:absolute; border-radius:50%; z-index:0; pointer-events:none;}
 .hero-stage .ring.r1{inset:2%; border:1px solid rgba(18,38,71,0.12);}
 .hero-stage .ring.r2{inset:13%; border:1px dashed rgba(44,91,214,0.32); animation:spin 60s linear infinite;}
-.hero-emblem{position:relative; z-index:2; width:80%; max-width:380px; filter:drop-shadow(0 22px 40px rgba(18,38,71,0.28)); animation:floaty 6s ease-in-out infinite;}
+.hero-emblem{position:relative; z-index:2; width:80%; max-width:380px; filter:drop-shadow(0 22px 40px rgba(18,38,71,0.28)); animation:floaty 6s ease-in-out infinite; mix-blend-mode:multiply;}
 .hero-chip{position:absolute; z-index:3; display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.92); border:1px solid var(--line); backdrop-filter:blur(10px); border-radius:14px; padding:11px 15px; box-shadow:var(--shadow-soft);}
 .hero-chip .ci{width:34px; height:34px; border-radius:9px; background:rgba(44,91,214,0.12); color:var(--blue-hi); display:flex; align-items:center; justify-content:center; flex:none;}
 .hero-chip b{font-family:var(--font-oswald); text-transform:uppercase; font-size:0.92rem; letter-spacing:0.02em; display:block; line-height:1.05; color:var(--navy);}
