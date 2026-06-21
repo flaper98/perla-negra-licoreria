@@ -1,161 +1,68 @@
 "use client";
 
-import {
-  MessageCircle,
-  Instagram,
-  Facebook,
-  MapPin,
-  Clock,
-  Phone,
-  ShieldCheck,
-} from "lucide-react";
-import { getWhatsappLink } from "@/data/products";
+import { useRegion } from "@/app/hooks/useRegion";
 
-const SOCIALS = {
-  instagram: "https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn",
-  facebook: "https://www.facebook.com/PerlaNegra.Distribuidor",
-};
+const WA = { Lima: "51970820056", Provincia: "51948778362" };
+function waLink(region, msg = "Hola Perla Negra 👋, quiero más información.") {
+  return `https://wa.me/${WA[region] || WA.Lima}?text=${encodeURIComponent(msg)}`;
+}
 
-const CATEGORIES = [
-  "Whisky", "Ron", "Vodka", "Gin",
-  "Tequila", "Vinos", "Champagne", "Pisco",
-];
+const WA_SVG = (
+  <svg className="ico" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+);
 
 export default function Footer() {
+  const region = useRegion();
+  const cur = region || "Lima";
+
   return (
-    <footer id="contacto" className="relative overflow-hidden bg-[#050505] text-white">
-      {/* Línea dorada superior */}
-      <div className="h-px bg-gradient-to-r from-transparent via-yellow-600/50 to-transparent" />
-
-      {/* Glow decorativo */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-64 w-1/2 -translate-x-1/2 opacity-30"
-        style={{ background: "radial-gradient(ellipse at top, rgba(212,160,23,0.12) 0%, transparent 70%)" }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-
-          {/* Columna 1: Marca */}
-          <div className="lg:col-span-2">
-            <div className="mb-5 flex items-center gap-3">
-              <img
-                src="/img/logo.png"
-                alt="Perla Negra"
-                className="h-12 w-12 rounded-full border border-yellow-500/30 bg-white object-contain p-1"
-              />
-              <div>
-                <p className="text-xl font-black text-white">Perla Negra</p>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-yellow-500">
-                  Licores Mayoristas
-                </p>
-              </div>
-            </div>
-
-            <p className="mb-4 max-w-sm text-sm leading-relaxed text-white/55">
-              Distribuidora de licores al por mayor y menor con atención directa
-              por WhatsApp. Productos originales, precios competitivos y envíos
-              a todo el Perú.
-            </p>
-
-            <div className="flex items-center gap-2 text-xs text-white/35">
-              <ShieldCheck className="h-4 w-4 text-yellow-600/60" />
-              Venta exclusiva para mayores de 18 años. Consumo responsable.
-            </div>
-
-            {/* Redes sociales */}
-            <div className="mt-6 flex gap-3">
-              <a
-                href={SOCIALS.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/60 transition hover:border-pink-500/50 hover:bg-pink-500/10 hover:text-pink-400"
-              >
-                <Instagram className="h-4 w-4" />
+    <footer id="contacto">
+      <div className="wrap">
+        <div className="foot-grid">
+          <div className="foot-brand">
+            <img src="/img/logo.png" alt="Perla Negra Distribuidora" />
+            <p>Tu distribuidora de licores de confianza. Pedidos por WhatsApp, delivery en Lima y envíos a todo el Perú.</p>
+            <div className="socials">
+              <a href="https://www.facebook.com/PerlaNegra.Distribuidor" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg className="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
               </a>
-              <a
-                href={SOCIALS.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white/60 transition hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-blue-400"
-              >
-                <Facebook className="h-4 w-4" />
-              </a>
-              <a
-                href={getWhatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-green-500/30 bg-green-500/10 text-green-400 transition hover:bg-green-500/20"
-              >
-                <MessageCircle className="h-4 w-4" />
+              <a href="https://www.instagram.com/perlanegra_distribuidora" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
               </a>
             </div>
           </div>
 
-          {/* Columna 2: Categorías */}
-          <div>
-            <h4 className="mb-5 text-sm font-black uppercase tracking-widest text-yellow-500">
-              Categorías
-            </h4>
-            <ul className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-              {CATEGORIES.map((cat) => (
-                <li key={cat}>
-                  <a
-                    href={`/categoria/${cat.toLowerCase()}`}
-                    className="text-sm text-white/50 transition hover:text-yellow-400"
-                  >
-                    {cat}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="foot-col">
+            <h4>Tienda</h4>
+            <a href="/#ofertas">Ofertas y combos</a>
+            <a href="/categoria/whisky">Catálogo</a>
+            <a href="/#categorias">Categorías</a>
+            <a href="/#mayorista">Venta mayorista</a>
           </div>
 
-          {/* Columna 3: Contacto */}
-          <div>
-            <h4 className="mb-5 text-sm font-black uppercase tracking-widest text-yellow-500">
-              Contacto
-            </h4>
-            <div className="space-y-4 text-sm text-white/55">
-              <a
-                href="tel:+51970820056"
-                className="flex items-start gap-3 transition hover:text-white"
-              >
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-green-400" />
-                <span>+51 970 820 056<br />+51 948 778 362</span>
-              </a>
+          <div className="foot-col">
+            <h4>Pedidos · Lima</h4>
+            <a href={waLink("Lima")} target="_blank" rel="noopener">WhatsApp +51 970 820 056</a>
+            <p>Delivery en Lima Metropolitana</p>
+            <h4 style={{ marginTop: "22px" }}>Pedidos · Provincias</h4>
+            <a href={waLink("Provincia")} target="_blank" rel="noopener">WhatsApp +51 948 778 362</a>
+            <p>Envíos a todo el Perú</p>
+          </div>
 
-              <p className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-yellow-500" />
-                Jr. Callería 410, Manantay,<br />Pucallpa, Perú
-              </p>
-
-              <p className="flex items-start gap-3">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-yellow-500" />
-                Atención todos los días<br />
-                <strong className="text-yellow-400">24 horas</strong>
-              </p>
-            </div>
-
-            {/* WhatsApp CTA */}
-            <a
-              href={getWhatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-green-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-green-500/25 transition hover:bg-green-400"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Escribir al WhatsApp
-            </a>
+          <div className="foot-col">
+            <h4>Atención</h4>
+            <p>Lun – Sáb: 9:00 a.m. – 11:00 p.m.</p>
+            <p>Dom: 10:00 a.m. – 6:00 p.m.</p>
+            <p>Pagos: Yape, Plin, transferencia y efectivo.</p>
           </div>
         </div>
-      </div>
 
-      {/* Pie de página */}
-      <div className="border-t border-white/[0.07] px-6 py-5 text-center text-xs text-white/30">
-        © 2026 Perla Negra. Todos los derechos reservados.
+        <div className="foot-bottom">
+          <span>© {new Date().getFullYear()} Perla Negra Distribuidora. Todos los derechos reservados.</span>
+          <span className="age-badge">+18 · Tomar bebidas alcohólicas en exceso es dañino. Prohibida su venta a menores de edad.</span>
+        </div>
       </div>
     </footer>
   );

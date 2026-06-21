@@ -1,148 +1,51 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef } from "react";
-
-const categories = [
-  {
-    name: "Whisky",
-    slug: "whisky",
-    img: "/img/categorias/whisky.jpg",
-    tag: "Premium",
-  },
-  {
-    name: "Vodka",
-    slug: "vodka",
-    img: "/img/categorias/vodka.jpg",
-    tag: "Importados",
-  },
-  {
-    name: "Ron",
-    slug: "ron",
-    img: "/img/categorias/ron.jpg",
-    tag: "Mayorista",
-  },
-  {
-    name: "Gin",
-    slug: "gin",
-    img: "/img/categorias/gin.png",
-    tag: "Selección",
-  },
-  {
-    name: "Tequila",
-    slug: "tequila",
-    img: "/img/categorias/tequila.jpg",
-    tag: "Ofertas",
-  },
-  {
-    name: "Champagne",
-    slug: "champagne",
-    img: "/img/categorias/champagne.jpg",
-    tag: "Eventos",
-  },
-  {
-    name: "Vinos",
-    slug: "vinos",
-    img: "/img/categorias/vino.jpg",
-    tag: "Especiales",
-  },
-  {
-    name: "Pisco",
-    slug: "pisco",
-    img: "/img/categorias/pisco.jpg",
-    tag: "Peruanos",
-  },
-  {
-    name: "Energizantes",
-    slug: "energizantes",
-    img: "/img/categorias/energizante.jpg",
-    tag: "Ofertas",
-  },
-  {
-    name: "Licores",
-    slug: "licores",
-    img: "/img/categorias/licores.jpg",
-    tag: "Especiales",
-  },
+const CATS = [
+  { key: "whisky",      name: "Whisky",       icon: "glass" },
+  { key: "ron",         name: "Ron",           icon: "glass" },
+  { key: "vodka",       name: "Vodka",         icon: "glass" },
+  { key: "vinos",       name: "Vinos",         icon: "wine"  },
+  { key: "pisco",       name: "Pisco",         icon: "glass" },
+  { key: "tequila",     name: "Tequila",       icon: "glass" },
+  { key: "gin",         name: "Gin",           icon: "glass" },
+  { key: "champagne",   name: "Espumantes",    icon: "wine"  },
+  { key: "licores",     name: "Cremas",        icon: "glass" },
+  { key: "energizantes",name: "Energizantes",  icon: "can"   },
 ];
 
+const ICONS = {
+  glass: (
+    <svg style={{width:"17px",height:"17px"}} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M8 3h8l-1 9a3 3 0 01-3 2.5A3 3 0 019 12L8 3z"/><path d="M12 14.5V21M8.5 21h7"/>
+    </svg>
+  ),
+  wine: (
+    <svg style={{width:"17px",height:"17px"}} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M7 3h10c0 5-2 8-5 8s-5-3-5-8z"/><path d="M12 11v7M8.5 21h7"/>
+    </svg>
+  ),
+  can: (
+    <svg style={{width:"17px",height:"17px"}} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="7" y="3" width="10" height="18" rx="2"/><path d="M7 7h10M7 17h10"/>
+    </svg>
+  ),
+};
+
 export default function Categories() {
-  const scrollRef = useRef(null);
-
-  const move = (direction) => {
-    scrollRef.current?.scrollBy({
-      left: direction === "right" ? 500 : -500,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <section
-      id="categorias"
-      className="relative overflow-hidden bg-gradient-to-b from-[#fff8ea] to-[#f4efe4] py-8"
-    >
-      <div className="mx-auto max-w-[1700px] px-6">
-        <div className="mb-6 flex items-end justify-between">
-          <div>
-            <p className="mb-2 text-xs font-black uppercase tracking-[0.35em] text-yellow-700">
-              Categorías
-            </p>
-
-            <h2 className="text-3xl font-black text-black md:text-4xl">
-              Todo lo que buscas en licores
-            </h2>
-          </div>
+    <section className="section" id="categorias" style={{ paddingBottom: 0 }}>
+      <div className="wrap">
+        <div className="section-head" style={{ marginBottom: "24px" }}>
+          <span className="eyebrow">Explora el catálogo</span>
+          <h2 className="silver-text">Compra por categoría</h2>
         </div>
-
-        <div className="relative">
-          <button
-            onClick={() => move("left")}
-            className="absolute -left-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black text-yellow-300 shadow-xl transition hover:scale-110"
-          >
-            <ChevronLeft />
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none]"
-          >
-            {categories.map((cat) => (
-              <a
-                key={cat.name}
-                href={`/categoria/${cat.slug}`}
-                className="group relative min-w-[220px] overflow-hidden rounded-[1.5rem] bg-black shadow-lg"
-              >
-                <div className="relative h-36 overflow-hidden">
-                  <img
-                    src={cat.img}
-                    alt={cat.name}
-                    className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-                  <div className="absolute left-4 top-4 rounded-full border border-yellow-400/30 bg-black/40 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-yellow-300 backdrop-blur">
-                    Premium
-                  </div>
-
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="text-2xl font-black text-white">
-                      {cat.name}
-                    </h3>
-
-                    <p className="text-sm text-white/70">Ver productos →</p>
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <button
-            onClick={() => move("right")}
-            className="absolute -right-2 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-black text-yellow-300 shadow-xl transition hover:scale-110"
-          >
-            <ChevronRight />
-          </button>
+        <div className="cat-grid">
+          {CATS.map(c => (
+            <a key={c.key} className="cat-card" href={`/categoria/${c.key}`}>
+              <div className="cico">{ICONS[c.icon]}</div>
+              <h3>{c.name}</h3>
+            </a>
+          ))}
         </div>
       </div>
     </section>

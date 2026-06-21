@@ -1,216 +1,65 @@
 "use client";
 
-import {
-  MessageCircle,
-  Menu,
-  X,
-  Instagram,
-  Facebook,
-  Search,
-  Wine,
-  Flame,
-  ShieldCheck,
-  Truck,
-  BadgePercent,
-} from "lucide-react";
-import { getWhatsappLink } from "@/data/products";
 import { useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRegion, setRegionCache } from "@/app/hooks/useRegion";
 
-export default function Header({ hideMenu = false }) {
-  const [search, setSearch] = useState("");
+const WA = { Lima: "51970820056", Provincia: "51948778362" };
+
+function waLink(region, msg = "Hola Perla Negra 👋, me interesan sus productos.") {
+  return `https://wa.me/${WA[region] || WA.Lima}?text=${encodeURIComponent(msg)}`;
+}
+
+const WaSvg = () => (
+  <svg className="ico" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+  </svg>
+);
+
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const router = useRouter();
+  const region = useRegion();
+  const cur = region || "Lima";
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-
-    const query = search.trim();
-    if (!query) return;
-
-    setMenuOpen(false);
-    router.push(`/buscar?q=${encodeURIComponent(query)}`);
-  };
-
-  const links = [
-    { name: "Inicio", href: "/", icon: Flame },
-    { name: "Ofertas", href: "/#ofertas", icon: BadgePercent },
-    { name: "Whisky", href: "/categoria/whisky", icon: Wine },
-    { name: "Ron", href: "/categoria/ron", icon: Wine },
-    { name: "Vodka", href: "/categoria/vodka", icon: Wine },
-    { name: "Gin", href: "/categoria/gin", icon: Wine },
-    { name: "Vinos", href: "/categoria/vinos", icon: Wine },
-    { name: "Champagne", href: "/categoria/champagne", icon: Wine },
-    { name: "Tequila", href: "/categoria/tequila", icon: Wine },
-    { name: "Pisco", href: "/categoria/pisco", icon: Wine },
-    { name: "Energizantes", href: "/categoria/energizantes", icon: Flame },
-    { name: "Licores", href: "/categoria/licores", icon: Wine },
-  ];
-
-  const socials = {
-    instagram:
-      "https://www.instagram.com/perlanegra_distribuidora?igsh=OHlteDhqd3o3anFn",
-    facebook: "https://www.facebook.com/PerlaNegra.Distribuidor",
-  };
+  const changeRegion = (r) => { setRegionCache(r, true); window.location.reload(); };
 
   return (
-    <header className="fixed left-0 top-4 z-50 w-full px-3 sm:px-4">
-      <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] border border-yellow-500/30 bg-[#080706]/95 shadow-2xl shadow-black/40 backdrop-blur-2xl">
-        <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6">
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-yellow-500/40 bg-black text-yellow-400 shadow-lg lg:hidden"
-            aria-label="Abrir menú"
-          >
-            {menuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
-
-          <Link
-            href="/"
-            className="flex min-w-0 flex-1 items-center gap-3 lg:flex-none"
-          >
-            <img
-              src="/img/logo.png"
-              alt="Perla Negra"
-              className="h-12 w-12 rounded-full border border-yellow-500/30 bg-white object-contain p-1"
-            />
-            <div className="min-w-0">
-              <p className="truncate text-xl font-black text-white">
-                Perla Negra
-              </p>
-              <p className="truncate text-[10px] uppercase tracking-[0.28em] text-yellow-500">
-                Licores Mayoristas
-              </p>
+    <>
+      <header>
+        <div className="wrap">
+          <nav className="nav">
+            <a href="/" className="brand">
+              <img src="/img/logo.png" alt="Perla Negra Distribuidora" />
+              <span className="bname">Perla Negra<small>Distribuidora</small></span>
+            </a>
+            <div className="nav-links">
+              <a href="/">Inicio</a>
+              <a href="/#ofertas">Ofertas</a>
+              <a href="/categoria/whisky">Catálogo</a>
+              <a href="/#mayorista">Mayorista</a>
+              <a href="/#contacto">Contacto</a>
             </div>
-          </Link>
-
-          <form onSubmit={handleSearch} className="hidden flex-1 lg:flex">
-            <div className="flex w-full items-center rounded-full border border-yellow-500/20 bg-white/95 px-4 py-2.5">
-              <Search className="mr-2 h-4 w-4 text-black/40" />
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar whisky, ron, vodka..."
-                className="w-full bg-transparent text-sm text-black outline-none"
-              />
-            </div>
-          </form>
-
-          <div className="hidden items-center gap-2 lg:flex">
-            <a
-              href={socials.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-pink-400"
-            >
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a
-              href={socials.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full bg-white/5 p-2 text-white/70 transition hover:text-blue-400"
-            >
-              <Facebook className="h-4 w-4" />
-            </a>
-            <a
-              href={getWhatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 inline-flex rounded-full bg-green-500 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-green-500/25 hover:bg-green-400"
-            >
-              <MessageCircle className="mr-2 h-4 w-4" />
-              WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <div className="h-px bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent" />
-        {!hideMenu && (
-          <nav className="hidden border-t border-yellow-500/15 lg:flex">
-            <div className="flex w-full items-center justify-center gap-7 px-8 py-3">
-              {links.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-bold text-white/80 hover:text-yellow-400"
-                >
-                  {link.name}
-                </Link>
-              ))}
+            <div className="nav-right">
+              <div className="region-toggle">
+                <button className={cur === "Lima" ? "active" : ""} onClick={() => changeRegion("Lima")}>Lima</button>
+                <button className={cur === "Provincia" ? "active" : ""} onClick={() => changeRegion("Provincia")}>Provincias</button>
+              </div>
+              <a className="btn btn-wa" href={waLink(cur)} target="_blank" rel="noopener" style={{ padding: "10px 18px" }}>
+                <WaSvg /> Pedir
+              </a>
+              <button className="menu-btn" id="menuBtn" aria-label="Menú" onClick={() => setMenuOpen(o => !o)}>
+                <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+              </button>
             </div>
           </nav>
-        )}
-        {menuOpen && (
-          <div className="bg-[radial-gradient(circle_at_top,rgba(212,160,23,0.18),transparent_35%),#090806] px-4 pb-5 pt-4 lg:hidden">
-            <form onSubmit={handleSearch} className="mb-5">
-              <div className="flex items-center rounded-2xl border border-yellow-500/30 bg-white px-4 py-3">
-                <Search className="mr-2 h-5 w-5 text-black/40" />
-                <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Buscar productos..."
-                  className="w-full text-sm text-black outline-none"
-                />
-              </div>
-            </form>
-
-            <p className="mb-3 flex items-center gap-2 text-sm font-black uppercase tracking-wide text-yellow-400">
-              <Wine className="h-4 w-4" />
-              Categorías
-            </p>
-
-            <nav className="grid grid-cols-2 gap-3">
-              {links.map((link) => {
-                const Icon = link.icon;
-
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMenuOpen(false)}
-                    className="flex items-center gap-2 rounded-2xl border border-yellow-500/20 bg-white/[0.07] px-4 py-3 font-black text-white shadow-inner hover:border-yellow-400 hover:bg-yellow-500/10"
-                  >
-                    <Icon className="h-4 w-4 text-yellow-400" />
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            <a
-              href={getWhatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 flex items-center justify-center rounded-2xl bg-green-500 px-5 py-4 text-lg font-black text-white shadow-lg shadow-green-500/30"
-            >
-              <MessageCircle className="mr-2 h-6 w-6" />
-              Pedir por WhatsApp
-            </a>
-
-            <div className="mt-5 grid grid-cols-3 gap-2 text-center text-[11px] text-white/70">
-              <div className="rounded-2xl bg-white/5 p-3">
-                <ShieldCheck className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
-                Originales
-              </div>
-              <div className="rounded-2xl bg-white/5 p-3">
-                <Truck className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
-                Envíos
-              </div>
-              <div className="rounded-2xl bg-white/5 p-3">
-                <BadgePercent className="mx-auto mb-1 h-5 w-5 text-yellow-400" />
-                Mayorista
-              </div>
-            </div>
-          </div>
-        )}
+        </div>
+      </header>
+      <div className={`mobile-nav${menuOpen ? " open" : ""}`}>
+        <a href="/" onClick={() => setMenuOpen(false)}>Inicio</a>
+        <a href="/#ofertas" onClick={() => setMenuOpen(false)}>Ofertas</a>
+        <a href="/categoria/whisky" onClick={() => setMenuOpen(false)}>Catálogo</a>
+        <a href="/#mayorista" onClick={() => setMenuOpen(false)}>Mayorista</a>
+        <a href="/#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
       </div>
-    </header>
+    </>
   );
 }

@@ -1,89 +1,144 @@
 "use client";
 
-import { MessageCircle, ChevronDown } from "lucide-react";
-import { getWhatsappLink } from "@/data/products";
+import { useEffect, useRef, useState } from "react";
+import { useRegion, setRegionCache } from "@/app/hooks/useRegion";
+import { promotionLima } from "@/data/promotion_lima";
+import { promotions as promotionProvincia } from "@/data/promotions";
+
+const WA = { Lima: "51970820056", Provincia: "51948778362" };
+function waLink(region, msg) {
+  return `https://wa.me/${WA[region] || WA.Lima}?text=${encodeURIComponent(msg)}`;
+}
+
+const WORDS = ["trago", "whisky", "ron", "pisco", "vino"];
+
+const TRUCK_SVG = <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>;
+const TAG_SVG = <svg className="ico" style={{width:"13px",height:"13px"}} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg>;
 
 export default function Hero() {
+  const region = useRegion();
+  const cur = region || "Lima";
+
+  /* ---- Word rotator ---- */
+  const [wordIdx, setWordIdx] = useState(0);
+  const [swapping, setSwapping] = useState(false);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSwapping(true);
+      setTimeout(() => {
+        setWordIdx(i => (i + 1) % WORDS.length);
+        setSwapping(false);
+      }, 250);
+    }, 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  /* ---- Mini carousel ---- */
+  const pool = cur === "Lima"
+    ? promotionLima.slice(0, Math.min(promotionLima.length, 20))
+    : promotionProvincia.slice(0, Math.min(promotionProvincia.length, 20));
+
+  const pick = [];
+  const step = Math.max(1, Math.floor(pool.length / 5));
+  for (let k = 0; k < pool.length && pick.length < 5; k += step) pick.push(pool[k]);
+
+  const [miniIdx, setMiniIdx] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState({});
+  useEffect(() => {
+    if (!pick.length) return;
+    const id = setInterval(() => setMiniIdx(i => (i + 1) % pick.length), 2600);
+    return () => clearInterval(id);
+  }, [pick.length, cur]);
+
+  const handleImgLoad = (i) => setImgLoaded(prev => ({ ...prev, [i]: true }));
+
   return (
-    <section id="inicio" className="relative overflow-hidden bg-black">
-      <div className="relative h-[560px] md:h-[580px]">
-        {/* Imagen estática en móvil — carga instantánea para Facebook Ads */}
-        <img
-          src="/img/hero-mobile.png"
-          alt="Perla Negra Distribuidora de Licores"
-          className="absolute inset-0 h-full w-full object-cover block md:hidden"
-          fetchpriority="high"
-        />
-
-        {/* Video solo en desktop */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover hidden md:block"
-        >
-          <source src="/video/video_portada.mp4" type="video/mp4" />
-        </video>
-
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/60" />
-
-        <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-6 pt-24">
-          <div className="max-w-xl text-white">
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.35em] text-yellow-400">
-              Perla Negra
-            </p>
-
-            <h1 className="mb-4 text-4xl font-black leading-tight md:text-6xl">
-              LICORES AL POR MAYOR Y MENOR
+    <section className="hero" id="inicio">
+      <div className="wrap">
+        <div className="hero-grid">
+          {/* ---- Copy ---- */}
+          <div className="hero-copy">
+            <span className="eyebrow">Distribuidora de licores · Perú</span>
+            <h1 className="silver-text">
+              El mejor <span className={`word-rot${swapping ? " swap" : ""}`}>{WORDS[wordIdx]}</span>,<br />al mejor precio.
             </h1>
-
-            <p className="mb-5 text-base text-white/85 md:text-xl">
-              Abastece tu negocio con licores originales, precios mayoristas y
-              atención directa por WhatsApp. ¡Compra fácil y rápido con
-              nosotros!
-            </p>
-
-            {/* Precios gancho — el primero coincide con el anuncio activo */}
-            <div className="mb-8 flex flex-wrap gap-2">
-              <span className="rounded-full border border-yellow-400 bg-yellow-400/20 px-3 py-1 text-xs font-black text-yellow-300 backdrop-blur-sm">
-                🔥 JW Black + Double Black 2x · S/150
-              </span>
-              {[
-                "JW Red Label 12u · S/390",
-                "Absolut Vodka 12u · S/400",
-                "Jose Cuervo · S/56",
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-yellow-400/40 bg-black/40 px-3 py-1 text-xs font-black text-yellow-300 backdrop-blur-sm"
-                >
-                  {item}
-                </span>
-              ))}
+            <p className="lede">Combos armados, packs y promociones del día — directo a tu celular. Haz tu pedido por WhatsApp y recíbelo. Atendemos Lima y provincias.</p>
+            <div className="cta-row">
+              <a href="#ofertas" className="btn btn-blue">
+                Ver ofertas y combos
+                <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <a href="/categoria/whisky" className="btn btn-ghost">Ir al catálogo</a>
             </div>
-
-            <div className="flex flex-wrap gap-4">
-              <a
-                href={getWhatsappLink("JW Black Label + JW Double Black — 2 botellas Lima S/150")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-green-500 px-7 py-3.5 text-base font-black text-white shadow-lg shadow-green-500/30 transition hover:scale-105 hover:bg-green-400"
-              >
-                <MessageCircle className="h-5 w-5" />
-                Pedir por WhatsApp
-              </a>
-
-              <a
-                href="#ofertas"
-                className="inline-flex items-center gap-2 rounded-full border-2 border-yellow-400 px-7 py-3.5 text-base font-black text-yellow-400 transition hover:scale-105 hover:bg-yellow-400 hover:text-black"
-              >
-                <ChevronDown className="h-5 w-5" />
-                Ver Ofertas
-              </a>
+            <div className="zona-note">
+              <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Mostrando precios para <b>{cur}</b>
             </div>
           </div>
+
+          {/* ---- Stage ---- */}
+          <div className="hero-stage">
+            <div className="hero-glow" />
+            <div className="ring r1" />
+            <div className="ring r2" />
+            <img className="hero-emblem" src="/img/logo.png" alt="Perla Negra Distribuidora" />
+
+            {/* Chip delivery */}
+            <div className="hero-chip tl">
+              <div className="ci">{TRUCK_SVG}</div>
+              <div><b>Delivery hoy</b><span>en Lima Metropolitana</span></div>
+            </div>
+
+            {/* Mini carousel */}
+            {pick.length > 0 && (
+              <div className="promo-mini">
+                <div className="pm-label">{TAG_SVG} Promos de hoy</div>
+                <div className="pm-frame">
+                  {pick.map((p, i) => (
+                    <img
+                      key={i}
+                      src={p.image}
+                      alt={`Promo ${i + 1}`}
+                      className={i === miniIdx ? "on" : ""}
+                      onLoad={() => handleImgLoad(i)}
+                      loading="lazy"
+                    />
+                  ))}
+                </div>
+                <div className="pm-dots">
+                  {pick.map((_, i) => (
+                    <i key={i} className={i === miniIdx ? "on" : ""} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ---- Trust bar ---- */}
+      <div className="trust">
+        <div className="t">
+          <div className="ti">
+            <svg className="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg>
+          </div>
+          <div><b>Pedidos por WhatsApp</b><span>Rápido y sin complicaciones</span></div>
+        </div>
+        <div className="t">
+          <div className="ti">{TRUCK_SVG}</div>
+          <div><b>Delivery en Lima</b><span>Entrega en el día</span></div>
+        </div>
+        <div className="t">
+          <div className="ti">
+            <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></svg>
+          </div>
+          <div><b>Envíos a provincias</b><span>A todo el Perú</span></div>
+        </div>
+        <div className="t">
+          <div className="ti">
+            <svg className="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.2 5.2-2.8-2.8L7 14"/></svg>
+          </div>
+          <div><b>Precios mayoristas</b><span>Compra por cajas y packs</span></div>
         </div>
       </div>
     </section>
