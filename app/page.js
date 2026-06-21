@@ -65,7 +65,7 @@ function MayoristaSection({ region }) {
             </a>
           </div>
           <div className="band-img">
-            <img src="/img/logo.png" alt="Perla Negra Mayorista" />
+            <img src="/img/logo-perla-negra.png" alt="Perla Negra Mayorista" />
           </div>
         </div>
       </div>

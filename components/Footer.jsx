@@ -22,7 +22,7 @@ export default function Footer() {
       <div className="wrap">
         <div className="foot-grid">
           <div className="foot-brand">
-            <img src="/img/logo.png" alt="Perla Negra Distribuidora" />
+            <img src="/img/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
             <p>Tu distribuidora de licores de confianza. Pedidos por WhatsApp, delivery en Lima y envíos a todo el Perú.</p>
             <div className="socials">
               <a href="https://www.facebook.com/PerlaNegra.Distribuidor" target="_blank" rel="noopener" aria-label="Facebook">

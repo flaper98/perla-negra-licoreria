@@ -25,7 +25,7 @@ export default function AgeNotice() {
   return (
     <div id="ageGate">
       <div className="card">
-        <img src="/img/logo.png" alt="Perla Negra" />
+        <img src="/img/logo-perla-negra.png" alt="Perla Negra" />
         <h2 className="silver-text">¿Eres mayor de edad?</h2>
         <p>Para ingresar a Perla Negra Distribuidora debes tener 18 años o más. La venta de bebidas alcohólicas está prohibida para menores de edad.</p>
         <div className="gate-actions">
