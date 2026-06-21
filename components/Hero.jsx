@@ -81,7 +81,7 @@ export default function Hero() {
             <div className="hero-glow" />
             <div className="ring r1" />
             <div className="ring r2" />
-            <img className="hero-emblem" src="/img/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+            <img className="hero-emblem" src="/img/logo.png" alt="Perla Negra Distribuidora" />
 
             {/* Chip delivery */}
             <div className="hero-chip tl">
