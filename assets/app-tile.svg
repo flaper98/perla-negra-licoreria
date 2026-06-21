@@ -1,0 +1,5 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flanovax app tile">
+  <rect width="160" height="160" rx="38" fill="#2E33EC"></rect>
+  <path d="M80 34 C84 64, 93 73, 126 80 C93 87, 84 96, 80 126 C76 96, 67 87, 34 80 C67 73, 76 64, 80 34 Z" fill="#F5F1E8"></path>
+  <path d="M118 36 C119.4 45, 122.6 48.6, 130 50 C122.6 51.4, 119.4 55, 118 64 C116.6 55, 113.4 51.4, 106 50 C113.4 48.6, 116.6 45, 118 36 Z" fill="#EF4E0C"></path>
+</svg>

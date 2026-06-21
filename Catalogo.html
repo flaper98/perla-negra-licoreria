@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catálogo — Perla Negra Distribuidora</title>
+<link rel="icon" type="image/png" href="assets/logo-perla-negra.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="pn/styles.css" />
+</head>
+<body class="page-catalog">
+
+<!-- ===== AGE GATE ===== -->
+<div id="ageGate" hidden>
+  <div class="card">
+    <img src="assets/logo-perla-negra.png" alt="Perla Negra" />
+    <h2 class="silver-text">¿Eres mayor de edad?</h2>
+    <p>Para ingresar a Perla Negra Distribuidora debes tener 18 años o más. La venta de bebidas alcohólicas está prohibida para menores de edad.</p>
+    <div class="gate-actions">
+      <button class="btn btn-blue" id="ageYes" style="justify-content:center;">Sí, soy mayor de 18</button>
+      <button class="no" id="ageNo">No soy mayor de edad</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+        <span class="bname">Perla Negra<small>Distribuidora</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Inicio</a>
+        <a href="index.html#ofertas">Ofertas</a>
+        <a href="Catalogo.html" class="active">Catálogo</a>
+        <a href="index.html#mayorista">Mayorista</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="nav-right">
+        <div class="region-toggle">
+          <button data-region="lima">Lima</button>
+          <button data-region="provincias">Provincias</button>
+        </div>
+        <a class="btn btn-wa" id="headerWa" target="_blank" rel="noopener" style="padding:10px 18px;">
+          <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Pedir
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menú">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#ofertas">Ofertas</a>
+  <a href="Catalogo.html">Catálogo</a>
+  <a href="index.html#mayorista">Mayorista</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- ===== CATÁLOGO ===== -->
+<section class="section" id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Catálogo</span>
+      <h2 class="silver-text">Nuestros productos</h2>
+    </div>
+    <div class="region-banner">
+      <svg class="ico pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <div>
+        <b>Zona: <span id="zonaBanner">Lima</span></b>
+        <div class="txt" id="zonaTxt">Mostrando los productos seleccionados disponibles para Lima Metropolitana.</div>
+      </div>
+      <div class="region-toggle switch">
+        <button data-region="lima">Lima</button>
+        <button data-region="provincias">Provincias</button>
+      </div>
+    </div>
+    <div class="cat-toolbar">
+      <div class="search-box">
+        <svg class="ico si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input type="text" id="search" placeholder="Buscar producto…" />
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+        <p>Tu distribuidora de licores de confianza. Pedidos por WhatsApp, delivery en Lima y envíos a todo el Perú.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/PerlaNegra.Distribuidor" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/perlanegra_distribuidora" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Tienda</h4>
+        <a href="index.html#ofertas">Ofertas y combos</a>
+        <a href="Catalogo.html">Catálogo</a>
+        <a href="index.html#categorias">Categorías</a>
+        <a href="index.html#mayorista">Venta mayorista</a>
+      </div>
+      <div class="foot-col">
+        <h4>Pedidos · Lima</h4>
+        <a id="footWaLima" target="_blank" rel="noopener">WhatsApp +51 970 820 056</a>
+        <p>Delivery en Lima Metropolitana</p>
+        <h4 style="margin-top:22px;">Pedidos · Provincias</h4>
+        <a id="footWaProv" target="_blank" rel="noopener">WhatsApp +51 948 778 362</a>
+        <p>Envíos a todo el Perú</p>
+      </div>
+      <div class="foot-col">
+        <h4>Atención</h4>
+        <p>Lun – Sáb: 9:00 a.m. – 11:00 p.m.</p>
+        <p>Dom: 10:00 a.m. – 6:00 p.m.</p>
+        <p>Pagos: Yape, Plin, transferencia y efectivo.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Perla Negra Distribuidora. Todos los derechos reservados.</span>
+      <span class="age-badge">+18 · Tomar bebidas alcohólicas en exceso es dañino. Prohibida su venta a menores de edad.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="pn/core.js"></script>
+<script>
+  let activeCat = "todos";
+  let query = "";
+
+  const hash = decodeURIComponent(location.hash.replace("#", "")).trim();
+  if (hash && PN.CATS.some(c => c.key === hash)) activeCat = hash;
+
+  function renderChips() {
+    const chips = [{ key: "todos", name: "Todos" }, ...PN.CATS];
+    document.getElementById("chips").innerHTML = chips.map(c =>
+      `<button class="chip ${activeCat === c.key ? "active" : ""}" data-chip="${c.key}">${c.name}</button>`).join("");
+    document.querySelectorAll("[data-chip]").forEach(el =>
+      el.addEventListener("click", () => { activeCat = el.dataset.chip; renderChips(); renderProducts(); }));
+  }
+
+  function renderProducts() {
+    const grid = document.getElementById("productGrid");
+    const key = PN.regKey();
+    const r = PN.region;
+    let list = PN.PRODUCTS.filter(p => p[key] != null);
+    if (activeCat !== "todos") list = list.filter(p => p.cat === activeCat);
+    if (query) list = list.filter(p => p.name.toLowerCase().includes(query));
+    if (!list.length) {
+      grid.innerHTML = `<div class="empty">No encontramos productos con ese filtro en ${PN.ZONA_LABEL[r]}.<br/>Prueba otra categoría o escríbenos por WhatsApp.</div>`;
+      return;
+    }
+    grid.innerHTML = list.map(p => {
+      const price = p[key];
+      const showWas = p.was ? (r === "provincias" ? p.was + 6 : p.was) : null;
+      const msg = `Hola Perla Negra 👋, quiero pedir:\n• ${p.name} (${p.vol}) — S/ ${PN.fmt(price)}\nZona: ${PN.ZONA_LABEL[r]}`;
+      return `
+      <div class="pcard">
+        <div class="pthumb${p.img ? ' has-photo' : ''}">
+          ${p.was ? '<span class="pbadge">Oferta</span>' : ''}
+          ${p.img
+            ? `<img class="pphoto" src="${p.img}" alt="${p.name}" loading="lazy" decoding="async" onload="this.classList.add('loaded')" onerror="this.classList.add('loaded')" />`
+            : `<div class="bottle"></div><div class="pl-cat">${PN.CAT_NAME[p.cat]}</div>`}
+        </div>
+        <div class="pbody">
+          <span class="pcat">${PN.CAT_NAME[p.cat]}</span>
+          <h3>${p.name}</h3>
+          <span class="pvol">${p.vol}</span>
+          <div class="pprice">
+            <span class="now">S/ ${PN.fmt(price)}</span>
+            ${showWas ? `<span class="was">S/ ${PN.fmt(showWas)}</span>` : ''}
+          </div>
+          <a class="btn btn-wa" target="_blank" rel="noopener" href="${PN.waLink(PN.WA[r], msg)}">
+            ${PN.waSvg()} Pedir por WhatsApp
+          </a>
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  document.getElementById("search").addEventListener("input", e => {
+    query = e.target.value.toLowerCase().trim(); renderProducts();
+  });
+
+  function renderCatalog() { renderChips(); renderProducts(); }
+  PN.init(renderCatalog);
+</script>
+</body>
+</html>

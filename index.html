@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perla Negra Distribuidora — Licores, combos y ofertas</title>
+<link rel="icon" type="image/png" href="assets/logo-perla-negra.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="pn/styles.css" />
+<link id="gfont-Montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap">
+<link id="gfont-Inter" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<link id="gfont-Fira-Sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&amp;display=swap">
+</head>
+<body style="background-color: rgb(255, 255, 255)">
+
+<!-- ===== AGE GATE ===== -->
+<div id="ageGate" hidden>
+  <div class="card">
+    <img src="assets/logo-perla-negra.png" alt="Perla Negra" />
+    <h2 class="silver-text">¿Eres mayor de edad?</h2>
+    <p>Para ingresar a Perla Negra Distribuidora debes tener 18 años o más. La venta de bebidas alcohólicas está prohibida para menores de edad.</p>
+    <div class="gate-actions">
+      <button class="btn btn-blue" id="ageYes" style="justify-content:center;">Sí, soy mayor de 18</button>
+      <button class="no" id="ageNo">No soy mayor de edad</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="wrap">
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <img src="assets/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+        <span class="bname">Perla Negra<small>Distribuidora</small></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Inicio</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="Catalogo.html">Catálogo</a>
+        <a href="#mayorista">Mayorista</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="nav-right">
+        <div class="region-toggle">
+          <button data-region="lima">Lima</button>
+          <button data-region="provincias">Provincias</button>
+        </div>
+        <a class="btn btn-wa" id="headerWa" target="_blank" rel="noopener" style="padding:10px 18px;">
+          <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Pedir
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menú">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Inicio</a>
+  <a href="#ofertas">Ofertas</a>
+  <a href="Catalogo.html">Catálogo</a>
+  <a href="#mayorista">Mayorista</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Distribuidora de licores · Perú</span>
+        <h1 class="silver-text" style="font-family: Tahoma">El mejor <span class="word-rot" id="wordRot">trago</span>,<br />al mejor precio.</h1>
+        <p class="lede">Combos armados, packs y promociones del día — directo a tu celular. Haz tu pedido por WhatsApp y recíbelo. Atendemos Lima y provincias.</p>
+        <div class="cta-row">
+          <a href="#ofertas" class="btn btn-blue">Ver ofertas y combos
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="Catalogo.html" class="btn btn-ghost">Ir al catálogo</a>
+        </div>
+        <div class="zona-note">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Mostrando precios para <b id="zonaName">Lima</b>
+        </div>
+      </div>
+      <div class="hero-stage">
+        <div class="hero-glow"></div>
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <img class="hero-emblem" src="assets/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+        <div class="hero-chip tl">
+          <div class="ci"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div><b>Delivery hoy</b><span>en Lima Metropolitana</span></div>
+        </div>
+        <div class="promo-mini" id="heroMini">
+          <div class="pm-label"><svg class="ico" style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/></svg> Promos de hoy</div>
+          <div class="pm-frame" id="heroMiniFrame"></div>
+          <div class="pm-dots" id="heroMiniDots"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="t"><div class="ti"><svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg></div><div><b>Pedidos por WhatsApp</b><span>Rápido y sin complicaciones</span></div></div>
+    <div class="t"><div class="ti"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><b>Delivery en Lima</b><span>Entrega en el día</span></div></div>
+    <div class="t"><div class="ti"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12l8.73-5.04M12 22V12"/></svg></div><div><b>Envíos a provincias</b><span>A todo el Perú</span></div></div>
+    <div class="t"><div class="ti"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.2 5.2-2.8-2.8L7 14"/></svg></div><div><b>Precios mayoristas</b><span>Compra por cajas y packs</span></div></div>
+  </div>
+</section>
+
+<!-- ===== CATEGORÍAS (enlazan al catálogo) ===== -->
+<section class="section" id="categorias" style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:24px;">
+      <span class="eyebrow">Explora el catálogo</span>
+      <h2 class="silver-text">Compra por categoría</h2>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- ===== OFERTAS / COMBOS (destacado en inicio) ===== -->
+<section class="section" id="ofertas">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Ofertas · Combos · Packs</span>
+      <h2 class="silver-text">Promociones de hoy</h2>
+      <p class="sub">Promociones vigentes para tu zona. Toca cualquier afiche para pedir esa promoción por WhatsApp.</p>
+    </div>
+    <div class="offer-grid" id="offerGrid"></div>
+    <div class="promo-more" id="promoMore"></div>
+  </div>
+</section>
+
+
+<!-- ===== CTA CATÁLOGO ===== -->
+<section class="section cta-band">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div>
+        <span class="eyebrow">Catálogo completo</span>
+        <h2 class="silver-text">Más de 200 productos<br />en stock</h2>
+        <p>Whisky, ron, pisco, vinos, gin y más. Busca, filtra por categoría y pide por WhatsApp.</p>
+      </div>
+      <a href="Catalogo.html" class="btn btn-blue" style="padding:15px 26px;">Ver catálogo completo
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAYORISTA ===== -->
+<section class="section band-mayor" id="mayorista">
+  <div class="wrap">
+    <div class="mayor-grid">
+      <div>
+        <span class="eyebrow">Venta al por mayor</span>
+        <h2 class="silver-text">¿Tienes un negocio? Compra por mayor.</h2>
+        <p class="lede">Bodegas, bares, restaurantes y eventos: accede a precios especiales por caja y volumen. Cotiza tu pedido directo por WhatsApp y te enviamos la lista de precios mayorista.</p>
+        <div class="mayor-feats">
+          <div class="mf"><b>+200</b><span>Productos en stock</span></div>
+          <div class="mf"><b>24h</b><span>Despacho en Lima</span></div>
+          <div class="mf"><b>Todo Perú</b><span>Envíos a provincias</span></div>
+          <div class="mf"><b>Sin mínimo alto</b><span>Compra desde 1 caja</span></div>
+        </div>
+      </div>
+      <div class="mayor-card">
+        <h3 class="silver-text">Solicita la lista mayorista</h3>
+        <p>Te enviamos precios por caja, combos para revendedores y condiciones de envío a tu zona.</p>
+        <a class="btn btn-wa" id="mayorWa" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="Catalogo.html">Ver catálogo primero</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-perla-negra.png" alt="Perla Negra Distribuidora" />
+        <p>Tu distribuidora de licores de confianza. Pedidos por WhatsApp, delivery en Lima y envíos a todo el Perú.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/PerlaNegra.Distribuidor" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg class="ico" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/perlanegra_distribuidora" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.2" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Tienda</h4>
+        <a href="#ofertas">Ofertas y combos</a>
+        <a href="Catalogo.html">Catálogo</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#mayorista">Venta mayorista</a>
+      </div>
+      <div class="foot-col">
+        <h4>Pedidos · Lima</h4>
+        <a id="footWaLima" target="_blank" rel="noopener">WhatsApp +51 970 820 056</a>
+        <p>Delivery en Lima Metropolitana</p>
+        <h4 style="margin-top:22px;">Pedidos · Provincias</h4>
+        <a id="footWaProv" target="_blank" rel="noopener">WhatsApp +51 948 778 362</a>
+        <p>Envíos a todo el Perú</p>
+      </div>
+      <div class="foot-col">
+        <h4>Atención</h4>
+        <p>Lun – Sáb: 9:00 a.m. – 11:00 p.m.</p>
+        <p>Dom: 10:00 a.m. – 6:00 p.m.</p>
+        <p>Pagos: Yape, Plin, transferencia y efectivo.</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Perla Negra Distribuidora. Todos los derechos reservados.</span>
+      <span class="age-badge">+18 · Tomar bebidas alcohólicas en exceso es dañino. Prohibida su venta a menores de edad.</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<script src="pn/core.js"></script>
+<script>
+  function renderCats() {
+    document.getElementById("catGrid").innerHTML = PN.CATS.map(c => `
+      <a class="cat-card" href="Catalogo.html#${c.key}">
+        <div class="cico">${PN.ICONS[c.icon]}</div>
+        <h3>${c.name}</h3>
+        <span>Ver productos →</span>
+      </a>`).join("");
+  }
+  function renderOffers() {
+    const r = PN.region;
+    const grid = document.getElementById("offerGrid");
+    const more = document.getElementById("promoMore");
+    const promos = PN.PROMOS.filter(p => !p.zona || p.zona === r);
+
+    if (!promos.length) {
+      grid.className = "offer-grid";
+      grid.innerHTML = `<div class="empty" style="grid-column:1/-1">Pronto nuevas promociones para ${PN.ZONA_LABEL[r]}.<br/>Escríbenos por WhatsApp para conocer las ofertas vigentes en tu zona.</div>`;
+      if (more) more.innerHTML = "";
+      return;
+    }
+
+    const STEP = 9;
+    let shown = 0;
+    grid.className = "promo-grid";
+    grid.innerHTML = "";
+
+    function cardHtml(p, i) {
+      const msg = `Hola Perla Negra 👋, quiero esta promoción (#${i + 1}). Zona: ${PN.ZONA_LABEL[r]}.`;
+      return `
+      <a class="promo-card" target="_blank" rel="noopener" href="${PN.waLink(PN.WA[r], msg)}">
+        <img src="${p.img}" alt="Promoción Perla Negra ${i + 1}" loading="lazy" decoding="async" />
+        <span class="promo-cta">${PN.waSvg()} Pedir por WhatsApp</span>
+      </a>`;
+    }
+
+    function wireImg(card) {
+      const img = card.querySelector("img");
+      const done = () => { img.classList.add("loaded"); card.classList.add("ready"); };
+      if (img.complete && img.naturalWidth) done();
+      else { img.addEventListener("load", done); img.addEventListener("error", () => card.classList.add("ready")); }
+    }
+
+    function append(n) {
+      const frag = document.createElement("div");
+      let html = "";
+      for (let i = shown; i < Math.min(shown + n, promos.length); i++) html += cardHtml(promos[i], i);
+      frag.innerHTML = html;
+      const cards = [...frag.children];
+      cards.forEach(c => { grid.appendChild(c); wireImg(c); });
+      shown += cards.length;
+      if (more) {
+        if (shown >= promos.length) more.innerHTML = "";
+        else more.innerHTML = `<button class="btn btn-ghost" id="promoMoreBtn">Ver más promociones (${promos.length - shown})</button>`;
+        const btn = document.getElementById("promoMoreBtn");
+        if (btn) btn.addEventListener("click", () => append(STEP));
+      }
+    }
+
+    append(STEP);
+  }
+  // ===== Palabra rotativa en el titular =====
+  (function wordRotator(){
+    const el = document.getElementById("wordRot");
+    if (!el) return;
+    const words = ["trago", "whisky", "ron", "pisco", "vino"];
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      el.classList.remove("swap");
+      void el.offsetWidth;
+      el.textContent = words[i];
+      el.classList.add("swap");
+    }, 2200);
+  })();
+
+  // ===== Mini-carrusel de afiches del hero (por zona) =====
+  function renderHeroMini() {
+    const frame = document.getElementById("heroMiniFrame");
+    const dots = document.getElementById("heroMiniDots");
+    if (!frame) return;
+    if (window.__pnMini) { clearInterval(window.__pnMini); window.__pnMini = null; }
+    const r = PN.region;
+    const pool = PN.PROMOS.filter(p => !p.zona || p.zona === r);
+    // toma hasta 5 afiches repartidos del conjunto
+    const pick = [];
+    const step = Math.max(1, Math.floor(pool.length / 5));
+    for (let k = 0; k < pool.length && pick.length < 5; k += step) pick.push(pool[k]);
+    if (!pick.length) { frame.innerHTML = ""; dots.innerHTML = ""; return; }
+    frame.innerHTML = pick.map((p, i) => `<img src="${p.img}" alt="Promo ${i+1}" class="${i===0?'on':''}" loading="lazy" />`).join("");
+    dots.innerHTML = pick.map((_, i) => `<i class="${i===0?'on':''}"></i>`).join("");
+    const imgs = frame.querySelectorAll("img");
+    const ds = dots.querySelectorAll("i");
+    let cur = 0;
+    window.__pnMini = setInterval(() => {
+      imgs[cur].classList.remove("on"); ds[cur].classList.remove("on");
+      cur = (cur + 1) % imgs.length;
+      imgs[cur].classList.add("on"); ds[cur].classList.add("on");
+    }, 2600);
+  }
+
+  renderCats();
+  PN.init(() => { renderOffers(); renderHeroMini(); });
+</script>
+</body>
+</html>

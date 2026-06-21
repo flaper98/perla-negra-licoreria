@@ -1,0 +1,12 @@
+# Archivos de prototipo y design system — no van al deploy público
+ui_kits/
+tokens/
+_ds_bundle.js
+_ds_manifest.json
+_adherence.oxlintrc.json
+SKILL.md
+.thumbnail
+
+# Página original renombrada (reemplazada por index.html)
+Perla Negra.html
+Flanovax Website.html

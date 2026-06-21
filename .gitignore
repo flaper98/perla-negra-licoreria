@@ -1,0 +1,18 @@
+# Prototipos y archivos de design system (otro proyecto)
+Flanovax Website.html
+ui_kits/
+tokens/
+_ds_bundle.js
+_ds_manifest.json
+_adherence.oxlintrc.json
+SKILL.md
+.thumbnail
+components/
+guidelines/
+screenshots/
+uploads/
+readme.md
+styles.css
+
+# Archivo original renombrado a index.html
+Perla Negra.html
