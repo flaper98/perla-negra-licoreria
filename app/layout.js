@@ -1,12 +1,24 @@
 import "./globals.css";
-import { Playfair_Display } from "next/font/google";
+import { Oswald, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
-const playfair = Playfair_Display({
+const oswald = Oswald({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-oswald",
   display: "swap",
-  weight: ["400", "700", "900"],
+  weight: ["400", "500", "600", "700"],
+});
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-hanken",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  display: "swap",
+  weight: ["400", "700"],
 });
 
 const BASE_URL = "https://www.perlanegra.store";
@@ -15,56 +27,39 @@ const DESCRIPTION =
 
 export const metadata = {
   metadataBase: new URL(BASE_URL),
-  title: "Perla Negra | Licores Mayoristas en Perú",
+  title: "Perla Negra Distribuidora — Licores, combos y ofertas",
   description: DESCRIPTION,
   keywords: [
     "Perla Negra", "licores mayoristas", "mayorista licores peru",
     "whisky mayorista", "vodka mayorista", "ron mayorista",
     "distribuidora licores", "licores Pucallpa", "licores Lima",
   ],
-  alternates: {
-    canonical: BASE_URL,
-  },
+  alternates: { canonical: BASE_URL },
   openGraph: {
-    title: "Perla Negra | Licores Mayoristas en Perú",
+    title: "Perla Negra Distribuidora — Licores, combos y ofertas",
     description: DESCRIPTION,
     url: BASE_URL,
     siteName: "Perla Negra",
     type: "website",
     locale: "es_PE",
-    images: [
-      {
-        url: `${BASE_URL}/img/hero-desktop.png`,
-        width: 2560,
-        height: 1440,
-        alt: "Perla Negra — Licores Mayoristas en Perú",
-      },
-    ],
+    images: [{ url: `${BASE_URL}/img/logo.png`, width: 800, height: 800, alt: "Perla Negra Distribuidora" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Perla Negra | Licores Mayoristas en Perú",
+    title: "Perla Negra Distribuidora — Licores, combos y ofertas",
     description: DESCRIPTION,
-    images: [`${BASE_URL}/img/hero-desktop.png`],
+    images: [`${BASE_URL}/img/logo.png`],
   },
 };
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Perla Negra Licores",
-  description:
-    "Distribuidora mayorista de licores en Perú. Whisky, vodka, ron, gin, tequila, vinos y pisco al por mayor.",
+  name: "Perla Negra Distribuidora",
+  description: "Distribuidora mayorista de licores en Perú.",
   url: BASE_URL,
   logo: `${BASE_URL}/img/logo.png`,
-  image: `${BASE_URL}/img/logo.png`,
   telephone: "+51970820056",
-  contactPoint: {
-    "@type": "ContactPoint",
-    telephone: "+51970820056",
-    contactType: "sales",
-    availableLanguage: "Spanish",
-  },
   areaServed: [
     { "@type": "City", name: "Lima" },
     { "@type": "City", name: "Pucallpa" },
@@ -75,7 +70,7 @@ const localBusinessSchema = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={playfair.variable}>
+    <html lang="es" className={`${oswald.variable} ${hanken.variable} ${spaceMono.variable}`}>
       <body>
         {children}
         <script
