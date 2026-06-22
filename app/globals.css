@@ -31,7 +31,7 @@
   --maxw:1200px;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; overflow-x:hidden;}
 body{
   margin:0; background:var(--bg); color:var(--text);
   font-family:var(--font-hanken),system-ui,sans-serif;
@@ -220,9 +220,12 @@ footer{background:#0C1A33; border-top:1px solid var(--line); padding:64px 0 32px
 .wa-float svg{width:32px; height:32px; color:#04200f;}
 
 /* Mobile nav */
-.mobile-nav{display:none; position:fixed; inset:74px 0 0; z-index:99; background:rgba(238,242,249,0.98); backdrop-filter:blur(10px); padding:24px; flex-direction:column; gap:6px;}
+.mobile-nav{display:none; position:fixed; inset:74px 0 0; z-index:99; background:rgba(238,242,249,0.98); backdrop-filter:blur(10px); padding:24px; flex-direction:column; gap:6px; overflow-y:auto;}
 .mobile-nav a{padding:14px 8px; font-family:var(--font-oswald); text-transform:uppercase; font-size:1.3rem; border-bottom:1px solid var(--line); color:var(--navy);}
 .mobile-nav.open{display:flex;}
+/* Elementos que solo aparecen en mobile-nav (ocultos en desktop) */
+.mobile-nav .mob-region,
+.mobile-nav .mob-wa{display:none;}
 
 @media (max-width:1024px){.nav-links{display:none;} .trust{grid-template-columns:1fr 1fr;}}
 @media (max-width:760px){
@@ -233,11 +236,18 @@ footer{background:#0C1A33; border-top:1px solid var(--line); padding:64px 0 32px
   .hero-chip.tl{right:0; left:auto;}
   .promo-mini{width:128px; left:0; bottom:2%; padding:7px;}
   .promo-mini .pm-label{font-size:0.52rem;}
-  .mayor-grid{grid-template-columns:1fr;}
+  .band-mayor{grid-template-columns:1fr;}
   .foot-grid{grid-template-columns:1fr 1fr;}
   .promo-grid{grid-template-columns:1fr 1fr;}
   .menu-btn{display:flex;}
   .region-toggle button{padding:7px 11px;}
   .trust{grid-template-columns:1fr;}
+}
+/* ===== Mobile: oculta region-toggle y btn-wa del header para evitar overflow ===== */
+@media (max-width:640px){
+  .nav-right .region-toggle,
+  .nav-right .btn-wa { display:none; }
+  .mobile-nav .mob-region { display:flex; gap:6px; padding:10px 8px; }
+  .mobile-nav .mob-wa { display:flex; }
 }
 @media (max-width:430px){.brand .bname{font-size:0.95rem;} .wrap{padding:0 16px;}}
