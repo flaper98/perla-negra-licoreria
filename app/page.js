@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import AgeNotice from "@/components/AgeNotice";
 import Header from "@/components/Header";
@@ -65,7 +65,7 @@ function MayoristaSection({ region }) {
             </a>
           </div>
           <div className="band-img">
-            <img src="/img/logo.png" alt="Perla Negra Mayorista" />
+            <img src="/img/logo.webp" alt="Perla Negra Mayorista" />
           </div>
         </div>
       </div>

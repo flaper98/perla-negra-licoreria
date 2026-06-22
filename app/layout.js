@@ -1,4 +1,4 @@
-import "./globals.css";
+﻿import "./globals.css";
 import { Oswald, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -42,13 +42,13 @@ export const metadata = {
     siteName: "Perla Negra",
     type: "website",
     locale: "es_PE",
-    images: [{ url: `${BASE_URL}/img/logo.png`, width: 800, height: 800, alt: "Perla Negra Distribuidora" }],
+    images: [{ url: `${BASE_URL}/img/logo.webp`, width: 800, height: 800, alt: "Perla Negra Distribuidora" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Perla Negra Distribuidora — Licores, combos y ofertas",
     description: DESCRIPTION,
-    images: [`${BASE_URL}/img/logo.png`],
+    images: [`${BASE_URL}/img/logo.webp`],
   },
 };
 
@@ -58,7 +58,7 @@ const localBusinessSchema = {
   name: "Perla Negra Distribuidora",
   description: "Distribuidora mayorista de licores en Perú.",
   url: BASE_URL,
-  logo: `${BASE_URL}/img/logo.png`,
+  logo: `${BASE_URL}/img/logo.webp`,
   telephone: "+51970820056",
   areaServed: [
     { "@type": "City", name: "Lima" },
