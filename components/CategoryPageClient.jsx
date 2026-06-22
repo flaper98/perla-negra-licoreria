@@ -41,7 +41,6 @@ function splitNameVol(fullName) {
 }
 
 function ProductCard({ p, region, priority }) {
-  const [imgLoaded, setImgLoaded] = useState(false);
   const cur = region || "Lima";
   const num = WA[cur] || WA.Lima;
   const { name: displayName, vol } = splitNameVol(p.name);
@@ -51,7 +50,7 @@ function ProductCard({ p, region, priority }) {
 
   return (
     <div className="pcard">
-      <div className={`pthumb${hasPhoto ? " has-photo" : ""}${hasPhoto && !imgLoaded ? " shimmer" : ""}`}>
+      <div className={`pthumb${hasPhoto ? " has-photo" : ""}`}>
         {p.badge && <span className="pbadge">Oferta</span>}
         {hasPhoto ? (
           <img
@@ -61,8 +60,6 @@ function ProductCard({ p, region, priority }) {
             loading={priority ? "eager" : "lazy"}
             decoding={priority ? "sync" : "async"}
             fetchpriority={priority ? "high" : "low"}
-            onLoad={() => setImgLoaded(true)}
-            onError={() => setImgLoaded(true)}
           />
         ) : (
           <>
