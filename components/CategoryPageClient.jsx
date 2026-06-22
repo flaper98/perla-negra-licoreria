@@ -35,10 +35,16 @@ const PIN_SVG = (
   </svg>
 );
 
+function splitNameVol(fullName) {
+  const m = fullName.match(/^(.*?)\s+(\d+(?:\.\d+)?\s*(?:ml|ML|l|L|lt|g|kg))\s*$/i);
+  return m ? { name: m[1], vol: m[2] } : { name: fullName, vol: null };
+}
+
 function ProductCard({ p, region }) {
   const [loaded, setLoaded] = useState(false);
   const cur = region || "Lima";
   const num = WA[cur] || WA.Lima;
+  const { name: displayName, vol } = splitNameVol(p.name);
   const msg = `Hola Perla Negra 👋, quiero pedir:\n• ${p.name} — ${p.unitPrice}\nZona: ${cur}`;
   const href = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
   const hasPhoto = !!p.image;
@@ -66,7 +72,8 @@ function ProductCard({ p, region }) {
       </div>
       <div className="pbody">
         <span className="pcat">{p.category}</span>
-        <h3>{p.name}</h3>
+        <h3>{displayName}</h3>
+        {vol && <span className="pvol">{vol}</span>}
         <div className="pprice">
           <span className="now">{p.unitPrice}</span>
         </div>

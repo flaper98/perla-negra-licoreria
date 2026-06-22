@@ -183,8 +183,8 @@ header{position:sticky; top:0; z-index:100; background:rgba(238,242,249,0.85); b
 .pbadge{position:absolute; top:12px; left:12px; font-family:var(--font-space-mono); font-size:0.6rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; background:var(--gold); color:#fff; padding:5px 9px; border-radius:6px; z-index:1;}
 .pbody{padding:16px 16px 18px; display:flex; flex-direction:column; gap:4px; flex:1;}
 .pbody .pcat{font-family:var(--font-space-mono); font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue-hi);}
-.pbody h3{font-size:1.06rem; line-height:1.05; text-transform:uppercase; font-weight:600; color:var(--navy); margin:0;}
-.pbody .pvol{font-size:0.8rem; color:var(--muted);}
+.pbody h3{font-size:1.06rem; line-height:1.1; text-transform:uppercase; font-weight:600; color:var(--navy); margin:0;}
+.pbody .pvol{font-size:0.8rem; color:var(--muted); margin-top:2px;}
 .pprice{display:flex; align-items:baseline; gap:9px; margin-top:8px;}
 .pprice .now{font-family:var(--font-oswald); font-weight:700; font-size:1.5rem; color:var(--navy);}
 .pprice .was{font-size:0.85rem; color:var(--silver-3); text-decoration:line-through;}
