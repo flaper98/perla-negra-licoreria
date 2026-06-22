@@ -1,152 +1,168 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp";
-import { products, getWhatsappLink } from "@/data/products";
-import { MessageCircle } from "lucide-react";
+import { useRegion, setRegionCache } from "@/app/hooks/useRegion";
+import { products } from "@/data/products";
 
-const categoryNames = {
-  whisky: "Whisky",
-  vodka: "Vodka",
-  ron: "Ron",
-  gin: "Gin",
-  tequila: "Tequila",
-  vinos: "Vinos",
-  champagne: "Champagne",
-  pisco: "Pisco",
-  energizantes: "Energizantes",
-  licores: "Licores",
-};
+const WA = { Lima: "51970820056", Provincia: "51948778362" };
 
-function getStableRandomProducts(items, seedText, limit = 5) {
-  const seed = seedText
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  return [...items]
-    .map((item, index) => ({ item, sort: Math.sin(seed + index) * 10000 }))
-    .sort((a, b) => a.sort - b.sort)
-    .slice(0, limit)
-    .map(({ item }) => item);
+const CATS = [
+  { key: "todos", name: "Todos" },
+  { key: "Whisky", name: "Whisky" },
+  { key: "Ron", name: "Ron" },
+  { key: "Vodka", name: "Vodka" },
+  { key: "Vinos", name: "Vinos" },
+  { key: "Pisco", name: "Pisco" },
+  { key: "Tequila", name: "Tequila" },
+  { key: "Gin", name: "Gin" },
+  { key: "Champagne", name: "Espumantes" },
+  { key: "Licores", name: "Cremas" },
+  { key: "Energizantes", name: "Energizantes" },
+];
+
+const WA_SVG = (
+  <svg style={{ width: "16px", height: "16px", flex: "none" }} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.87 9.87 0 001.512 5.26l-.999 3.648 3.477-.91zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.612-.916-2.207-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+  </svg>
+);
+
+const PIN_SVG = (
+  <svg className="ico pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 21s-7-6.5-7-11a7 7 0 0114 0c0 4.5-7 11-7 11z" /><circle cx="12" cy="10" r="2.5" />
+  </svg>
+);
+
+function ProductCard({ p, region }) {
+  const [loaded, setLoaded] = useState(false);
+  const cur = region || "Lima";
+  const num = WA[cur] || WA.Lima;
+  const msg = `Hola Perla Negra 👋, quiero pedir:\n• ${p.name} — ${p.unitPrice}\nZona: ${cur}`;
+  const href = `https://wa.me/${num}?text=${encodeURIComponent(msg)}`;
+  const hasPhoto = !!p.image;
+
+  return (
+    <div className="pcard">
+      <div className={`pthumb${hasPhoto ? " has-photo" : ""}`}>
+        {p.badge && <span className="pbadge">Oferta</span>}
+        {hasPhoto ? (
+          <img
+            className={`pphoto${loaded ? " loaded" : ""}`}
+            src={p.image}
+            alt={p.name}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setLoaded(true)}
+            onError={() => setLoaded(true)}
+          />
+        ) : (
+          <>
+            <div className="bottle" />
+            <div className="pl-cat">{p.category}</div>
+          </>
+        )}
+      </div>
+      <div className="pbody">
+        <span className="pcat">{p.category}</span>
+        <h3>{p.name}</h3>
+        <div className="pprice">
+          <span className="now">{p.unitPrice}</span>
+        </div>
+        <a className="btn btn-wa" href={href} target="_blank" rel="noopener">
+          {WA_SVG} Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+  );
 }
 
 export default function CategoryPageClient({ params }) {
-  const category = categoryNames[params.slug];
-  const filtered = products.filter((p) => p.category === category);
-  const promos = getStableRandomProducts(filtered, params.slug, 5);
+  const region = useRegion();
+  const cur = region || "Lima";
+  const [activeCat, setActiveCat] = useState(params?.slug ? params.slug.charAt(0).toUpperCase() + params.slug.slice(1) : "todos");
+  const [query, setQuery] = useState("");
+
+  const changeRegion = (r) => {
+    setRegionCache(r, true);
+    window.location.reload();
+  };
+
+  let list = products;
+  if (activeCat !== "todos") list = list.filter((p) => p.category === activeCat);
+  if (query) list = list.filter((p) => p.name.toLowerCase().includes(query.toLowerCase()));
 
   return (
-    <main className="bg-white">
+    <main>
       <Header />
+      <section className="section" id="catalogo">
+        <div className="wrap">
+          <div className="section-head">
+            <span className="eyebrow">Catálogo</span>
+            <h2 className="silver-text">Nuestros productos</h2>
+          </div>
 
-      <section className="mx-auto grid max-w-7xl gap-8 px-6 pb-16 pt-40 lg:grid-cols-[280px_1fr]">
-        <aside className="hidden lg:block">
-          <div className="sticky top-36 overflow-hidden rounded-[2rem] border border-yellow-900/10 bg-[#f7efe1] shadow-xl">
-            <div className="border-b border-black/10 bg-black px-5 py-4">
-              <p className="text-[11px] font-black uppercase tracking-[0.25em] text-yellow-400">
-                Recomendados
-              </p>
-              <h3 className="mt-1 text-xl font-black text-white">
-                Más vistos en {category}
-              </h3>
+          {/* Region banner */}
+          <div className="region-banner" style={{ marginBottom: "24px" }}>
+            {PIN_SVG}
+            <div>
+              <b>Zona: <span>{cur}</span></b>
+              <div className="txt">
+                {cur === "Lima"
+                  ? "Mostrando los productos seleccionados disponibles para Lima Metropolitana."
+                  : "Mostrando el catálogo con envío a provincias. Disponibilidad para todo el Perú."}
+              </div>
             </div>
-
-            <div className="space-y-1 p-3">
-              {promos.map((product) => (
-                <button
-                  key={product.name}
-                  onClick={() =>
-                    window.open(getWhatsappLink(product.name), "_blank")
-                  }
-                  className="group flex w-full items-center gap-3 rounded-2xl bg-white p-3 text-left transition hover:bg-yellow-50"
-                >
-                  <div className="flex h-16 w-14 shrink-0 items-center justify-center rounded-xl bg-[#faf6ee]">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="max-h-14 w-auto object-contain transition group-hover:scale-110"
-                    />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className="line-clamp-2 text-sm font-black leading-snug text-black">
-                      {product.name}
-                    </p>
-                    <div className="mt-1 flex items-center justify-between gap-2">
-                      <span className="text-sm font-black text-red-700">
-                        {product.unitPrice}
-                      </span>
-                    </div>
-                  </div>
-                </button>
-              ))}
+            <div className="region-toggle switch" style={{ marginLeft: "auto" }}>
+              <button className={cur === "Lima" ? "active" : ""} onClick={() => changeRegion("Lima")}>Lima</button>
+              <button className={cur === "Provincia" ? "active" : ""} onClick={() => changeRegion("Provincia")}>Provincias</button>
             </div>
+          </div>
 
-            <div className="p-4 pt-2">
+          {/* Buscador */}
+          <div className="cat-toolbar">
+            <div className="search-box">
+              <svg className="ico si" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="11" cy="11" r="7" /><path d="M21 21l-4-4" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Buscar producto…"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Chips de categoría */}
+          <div className="chips">
+            {CATS.map((c) => (
               <button
-                onClick={() =>
-                  window.open(
-                    getWhatsappLink(
-                      `Hola, quisiera información sobre los productos de ${category}.`,
-                      { customMessage: true }
-                    ),
-                    "_blank"
-                  )
-                }
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-green-500 px-4 py-3 text-sm font-black text-white shadow-lg shadow-green-500/20 transition hover:bg-green-400"
+                key={c.key}
+                className={`chip${activeCat === c.key ? " active" : ""}`}
+                onClick={() => setActiveCat(c.key)}
               >
-                <MessageCircle className="mr-2 h-4 w-4" />
-                Consultar por WhatsApp
+                {c.name}
               </button>
-            </div>
-          </div>
-        </aside>
-
-        <section>
-          <div className="mb-8 flex items-end justify-between">
-            <h1 className="text-4xl font-black text-black">{category}</h1>
-            <p className="text-sm font-bold text-black/50">
-              {filtered.length} productos
-            </p>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {filtered.map((product) => (
-              <article
-                key={product.name}
-                className="group overflow-hidden border border-black/10 bg-white p-5 text-center transition hover:shadow-xl"
-              >
-                <div className="relative flex h-64 items-center justify-center">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="max-h-56 w-auto object-contain transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-4 text-sm text-black/40">{product.category}</p>
-                <h3 className="mt-2 min-h-[48px] text-base font-bold text-black">
-                  {product.name}
-                </h3>
-                <p className="mt-3 text-lg font-black text-red-700">
-                  {product.unitPrice}
-                </p>
-                <p className="mt-1 text-xs font-bold text-black/50">
-                  Precio por caja: consultar
-                </p>
-                <button
-                  onClick={() =>
-                    window.open(getWhatsappLink(product.name), "_blank")
-                  }
-                  className="mt-5 inline-flex items-center justify-center rounded-full bg-green-500 px-5 py-3 text-xs font-black text-white transition hover:bg-green-400"
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  PEDIR POR WHATSAPP
-                </button>
-              </article>
             ))}
           </div>
-        </section>
-      </section>
 
+          {/* Grid de productos */}
+          <div className="product-grid">
+            {list.length === 0 ? (
+              <div className="catalog-empty">
+                No encontramos productos con ese filtro.<br />
+                Prueba otra categoría o escríbenos por WhatsApp.
+              </div>
+            ) : (
+              list.map((p, i) => (
+                <ProductCard key={i} p={p} region={cur} />
+              ))
+            )}
+          </div>
+        </div>
+      </section>
       <Footer />
       <FloatingWhatsapp />
     </main>
