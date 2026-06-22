@@ -1,6 +1,7 @@
 ﻿import "./globals.css";
 import { Oswald, Hanken_Grotesk, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -78,6 +79,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
