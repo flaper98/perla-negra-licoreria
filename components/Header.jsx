@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRegion, setRegionCache } from "@/app/hooks/useRegion";
@@ -28,7 +28,7 @@ export default function Header() {
         <div className="wrap">
           <nav className="nav">
             <a href="/" className="brand">
-              <img src="/img/logo.png" alt="Perla Negra Distribuidora" />
+              <img src="/img/logo.webp" alt="Perla Negra Distribuidora" />
               <span className="bname">Perla Negra<small>Distribuidora</small></span>
             </a>
             <div className="nav-links">

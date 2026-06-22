@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perla Negra — Distribuidora de Licores · Pucallpa, Perú</title>
+<meta name="description" content="Distribuidora de licores al por mayor y menor. Whisky, Ron, Vodka, Gin, Tequila y más. Delivery en Lima. Envíos a provincias. Precios mayoristas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & tokens ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink:      #060B14;
+  --ink-2:    #0A1326;
+  --panel:    #0D1929;
+  --line:     rgba(173,189,214,0.12);
+  --line-hi:  rgba(173,189,214,0.26);
+  --blue:     #2C5BD6;
+  --blue-hi:  #5C86F0;
+  --gold:     #C9A84C;
+  --gold-hi:  #E3C06E;
+  --gold-dim: rgba(201,168,76,0.14);
+  --silver-1: #F5F7FB;
+  --silver-2: #C7CFDC;
+  --silver-3: #9AA6B8;
+  --text:     #E4EAF5;
+  --muted:    #7A8BA4;
+  --wa:       #21C063;
+  --maxw:     1200px;
+  --r:        12px;
+  --r-lg:     20px;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Oswald', sans-serif; font-weight: 700; line-height: 1; letter-spacing: 0.01em; margin: 0; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+::selection { background: var(--blue); color: #fff; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ink-2); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ── Utilities ── */
+.eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.70rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+}
+.silver-text {
+  background: linear-gradient(170deg, #fff 0%, #D8DEE9 40%, #9AA6B8 75%, #C7CFDC 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gold-text {
+  background: linear-gradient(135deg, var(--gold-hi) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.section-sm { padding: 64px 0; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: 100px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: opacity .18s, transform .18s;
+}
+.btn:hover { opacity: .88; transform: translateY(-1px); }
+.btn:active { transform: scale(.97); }
+.btn-gold  { background: linear-gradient(135deg, var(--gold-hi), var(--gold)); color: var(--ink); }
+.btn-wa    { background: var(--wa); color: #fff; }
+.btn-ghost { border: 1px solid var(--line-hi); color: var(--silver-2); }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold-hi); }
+
+/* ── NAV ── */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 24px;
+  transition: background .3s, backdrop-filter .3s, border-color .3s;
+  border-bottom: 1px solid transparent;
+}
+#nav.scrolled {
+  background: rgba(6,11,20,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--line);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-logo img { height: 44px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+.nav-links a {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--silver-3);
+  transition: color .18s;
+}
+.nav-links a:hover { color: var(--gold-hi); }
+.nav-cta { display: flex; align-items: center; gap: 10px; }
+.nav-mobile-toggle { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+.nav-mobile-toggle span { display: block; width: 22px; height: 2px; background: var(--silver-2); border-radius: 2px; transition: .25s; }
+@media(max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .nav-mobile-toggle { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(6,11,20,0.96);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    gap: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* ── HERO SCROLL-VIDEO ── */
+#scroll-hero {
+  height: 500vh;
+  position: relative;
+}
+.scroll-video-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+#heroVideo {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6,11,20,0.3) 0%, rgba(6,11,20,0.6) 60%, rgba(6,11,20,0.92) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+  padding: 80px 24px 60px;
+}
+.hero-logo {
+  height: 90px;
+  width: auto;
+  margin-bottom: 28px;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,0.7));
+  animation: fadeDown .9s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-eyebrow {
+  animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .1s both;
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .2s both;
+  margin-bottom: 18px;
+  max-width: 14ch;
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--silver-2);
+  max-width: 48ch;
+  line-height: 1.6;
+  margin-bottom: 36px;
+  animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .32s both;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp .7s cubic-bezier(.16,1,.3,1) .44s both;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp .7s .8s both, bounce 2s 1.6s ease-in-out infinite;
+}
+.scroll-hint span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-hint svg { color: var(--gold); opacity: .6; }
+.scroll-progress-bar {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,0.08);
+  z-index: 3;
+}
+.scroll-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-hi));
+}
+@media(max-width: 768px) {
+  #scroll-hero { height: 100vh; }
+  .scroll-video-sticky { position: relative; }
+}
+@media(prefers-reduced-motion: reduce) {
+  #scroll-hero { height: 100vh; }
+}
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--ink-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 24px;
+  border-right: 1px solid var(--line);
+}
+.trust-item:last-child { border-right: none; }
+.trust-icon {
+  width: 42px; height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+}
+.trust-icon svg { width: 20px; height: 20px; }
+.trust-label { font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.02em; }
+.trust-sub { font-size: 0.78rem; color: var(--muted); margin-top: 1px; }
+@media(max-width: 900px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 500px) { .trust-grid { grid-template-columns: 1fr; } .trust-item { border-right: none; border-bottom: 1px solid var(--line); } }
+
+/* ── CATEGORÍAS ── */
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); margin-bottom: 12px; }
+.section-header p { color: var(--muted); max-width: 52ch; margin: 0 auto; font-size: 1.05rem; }
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+.cat-card {
+  position: relative;
+  border-radius: var(--r);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  transition: border-color .2s;
+}
+.cat-card:hover { border-color: var(--gold); }
+.cat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.cat-card:hover img { transform: scale(1.07); }
+.cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(6,11,20,0.9) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 14px;
+  opacity: .9;
+  transition: opacity .2s;
+}
+.cat-card:hover .cat-overlay { opacity: 1; }
+.cat-name { font-family: 'Oswald', sans-serif; font-size: 1.05rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; }
+.cat-cta {
+  font-size: 0.73rem;
+  color: var(--gold);
+  margin-top: 4px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .2s, transform .2s;
+}
+.cat-card:hover .cat-cta { opacity: 1; transform: none; }
+@media(max-width: 900px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width: 560px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── PRODUCTOS ── */
+#productos { background: var(--ink-2); }
+.prod-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.prod-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.prod-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+.prod-img {
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.prod-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform .4s;
+}
+.prod-card:hover .prod-img img { transform: scale(1.06); }
+.prod-info { padding: 16px; }
+.prod-cat { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 6px; }
+.prod-name { font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; color: var(--silver-1); line-height: 1.2; margin-bottom: 10px; }
+.prod-prices { margin-bottom: 14px; }
+.prod-unit { font-size: 1.1rem; font-weight: 700; color: var(--gold-hi); }
+.prod-box { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+.prod-wa {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--wa);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity .15s;
+}
+.prod-wa:hover { opacity: .88; }
+.prod-wa svg { width: 16px; height: 16px; }
+@media(max-width: 1000px) { .prod-grid { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width: 700px)  { .prod-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 420px)  { .prod-grid { grid-template-columns: 1fr; } }
+
+/* ── BENEFICIOS ── */
+.ben-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 56px;
+}
+.ben-card {
+  background: linear-gradient(160deg, var(--panel), var(--ink-2));
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  transition: border-color .2s, transform .2s;
+}
+.ben-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+.ben-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.ben-icon svg { width: 24px; height: 24px; }
+.ben-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 700; text-transform: uppercase; color: var(--silver-1); margin-bottom: 8px; }
+.ben-text { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+@media(max-width: 900px) { .ben-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 480px) { .ben-grid { grid-template-columns: 1fr; } }
+
+/* ── MAYORISTA ── */
+#mayorista {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 60%),
+              linear-gradient(180deg, var(--ink-2) 0%, var(--ink) 100%);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.mayorista-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.mayorista-text h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+.mayorista-text p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 32px; }
+.mayorista-steps { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.mayorista-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.step-num {
+  width: 32px; height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+}
+.step-content b { display: block; font-size: 0.95rem; color: var(--silver-1); margin-bottom: 2px; }
+.step-content span { font-size: 0.85rem; color: var(--muted); }
+.mayorista-card {
+  background: var(--panel);
+  border: 1px solid var(--line-hi);
+  border-radius: var(--r-lg);
+  padding: 40px 36px;
+  text-align: center;
+}
+.mayorista-card h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; color: var(--gold-hi); font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+.mayorista-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 28px; line-height: 1.6; }
+.mayorista-card .btn { width: 100%; justify-content: center; font-size: 1rem; padding: 16px; }
+.mayorista-tags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px; }
+.tag {
+  padding: 5px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--line-hi);
+  font-size: 0.78rem;
+  color: var(--silver-3);
+}
+@media(max-width: 800px) {
+  .mayorista-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ── STATS ── */
+#stats { background: var(--ink-2); border-bottom: 1px solid var(--line); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.stat-item {
+  background: var(--panel);
+  padding: 36px 24px;
+  text-align: center;
+}
+.stat-num { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 700; line-height: 1; }
+.stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+@media(max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── CONTACTO ── */
+#contacto { background: var(--ink); }
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.contacto-info h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); margin-bottom: 10px; }
+.contacto-info p { color: var(--muted); font-size: 1.02rem; margin-bottom: 36px; }
+.contacto-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.cd-icon {
+  width: 40px; height: 40px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold);
+  margin-top: 2px;
+}
+.cd-icon svg { width: 18px; height: 18px; }
+.cd-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+.cd-value { font-size: 0.95rem; color: var(--silver-1); font-weight: 500; }
+.contacto-form {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 36px;
+}
+.contacto-form h3 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; color: var(--silver-1); }
+.form-sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 24px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--silver-3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+.form-group input, .form-group textarea {
+  width: 100%;
+  background: var(--ink-2);
+  border: 1px solid var(--line-hi);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  transition: border-color .15s;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+.form-group textarea { height: 100px; resize: vertical; }
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  background: var(--wa);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity .15s;
+  cursor: pointer;
+  border: none;
+}
+.form-submit:hover { opacity: .88; }
+.form-submit svg { width: 18px; height: 18px; }
+@media(max-width: 760px) { .contacto-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ── FOOTER ── */
+footer {
+  background: #030608;
+  border-top: 1px solid var(--line);
+  padding: 56px 24px 32px;
+}
+.footer-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand img { height: 48px; margin-bottom: 16px; }
+.footer-brand p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; max-width: 38ch; }
+.footer-disclaimer { font-size: 0.75rem; color: rgba(255,255,255,0.25); margin-top: 12px; }
+.footer-col h4 { font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 16px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col li { font-size: 0.88rem; color: var(--muted); }
+.footer-col a { transition: color .15s; }
+.footer-col a:hover { color: var(--gold-hi); }
+.footer-bottom {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.2); }
+.footer-socials { display: flex; gap: 8px; }
+.footer-socials a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line-hi);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+  transition: border-color .15s, color .15s;
+}
+.footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+.footer-socials svg { width: 16px; height: 16px; }
+@media(max-width: 720px) { .footer-inner { grid-template-columns: 1fr; gap: 32px; } }
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: var(--wa);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(33,192,99,0.45);
+  z-index: 200;
+  transition: transform .2s, box-shadow .2s;
+  animation: waPulse 2.8s ease-in-out infinite;
+}
+.wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(33,192,99,0.6); }
+.wa-float svg { width: 28px; height: 28px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(7px); }
+}
+@keyframes waPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(33,192,99,0.6); }
+  65%  { box-shadow: 0 0 0 16px rgba(33,192,99,0); }
+  100% { box-shadow: 0 0 0 0 rgba(33,192,99,0); }
+}
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(28px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal-right.visible { opacity: 1; transform: none; }
+.d1 { transition-delay:  80ms !important; }
+.d2 { transition-delay: 160ms !important; }
+.d3 { transition-delay: 240ms !important; }
+.d4 { transition-delay: 320ms !important; }
+.d5 { transition-delay: 400ms !important; }
+.d6 { transition-delay: 480ms !important; }
+.d7 { transition-delay: 560ms !important; }
+.d8 { transition-delay: 640ms !important; }
+
+@media(prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right { opacity:1; transform:none; transition:none; }
+  .hero-logo, .hero-eyebrow, .hero-title, .hero-sub, .hero-actions { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <img src="./public/img/logo.png" alt="Perla Negra" onerror="this.style.display='none'">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#catalogo">Catálogo</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#beneficios">Nosotros</a></li>
+      <li><a href="#mayorista">Mayoristas</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://wa.me/51970820056?text=Hola,%20quisiera%20informaci%C3%B3n%20sobre%20su%20cat%C3%A1logo%20de%20licores%20y%20precios%20mayoristas." target="_blank" class="btn btn-wa" style="padding:10px 20px;font-size:.85rem;">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Pedir ahora
+      </a>
+    </div>
+    <button class="nav-mobile-toggle" id="menuToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO SCROLL-VIDEO -->
+<section id="scroll-hero" id="inicio">
+  <div class="scroll-video-sticky">
+    <video id="heroVideo" src="./public/video/video_portada.mp4"
+           playsinline muted preload="auto"
+           poster="./public/img/logo.png"></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="./public/img/logo.png" alt="Perla Negra" class="hero-logo">
+      <p class="eyebrow hero-eyebrow">Distribuidora de licores · Perú</p>
+      <h1 class="silver-text hero-title">El mejor trago,<br>al mejor precio.</h1>
+      <p class="hero-sub">Combos, packs y promociones directas a tu celular. Haz tu pedido por WhatsApp y recíbelo en Lima o en cualquier provincia del Perú.</p>
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn btn-gold">Ver catálogo</a>
+        <a href="https://wa.me/51970820056?text=Hola,%20quisiera%20informaci%C3%B3n%20sobre%20su%20cat%C3%A1logo%20de%20licores%20y%20precios%20mayoristas." target="_blank" class="btn btn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Pedir por WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </div>
+    <div class="scroll-progress-bar"><div class="scroll-progress-fill" id="progressFill"></div></div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="trust-label">Pedidos por WhatsApp</div>
+          <div class="trust-sub">Rápido y sin complicaciones</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <div class="trust-label">Delivery en Lima</div>
+          <div class="trust-sub">Entrega el mismo día</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <div class="trust-label">Envíos a provincias</div>
+          <div class="trust-sub">A todo el Perú</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div>
+          <div class="trust-label">Precios mayoristas</div>
+          <div class="trust-sub">Compra por cajas y packs</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<section id="catalogo" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal" style="margin-bottom:12px;">Catálogo completo</p>
+      <h2 class="silver-text reveal d1">Todo lo que necesitas</h2>
+      <p class="reveal d2" style="margin-top:14px;">Selección de las mejores marcas de importación y nacionales. Haz tu pedido por WhatsApp y te cotizamos al instante.</p>
+    </div>
+    <div class="cat-grid">
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20whiskies%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d1">
+        <img src="./public/img/categorias/whisky.jpg" alt="Whisky" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Whisky</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20vodkas%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d2">
+        <img src="./public/img/categorias/vodka.jpg" alt="Vodka" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Vodka</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20rones%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d3">
+        <img src="./public/img/categorias/ron.jpg" alt="Ron" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Ron</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20gins%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d4">
+        <img src="./public/img/categorias/Gin.png" alt="Gin" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Gin</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20tequilas%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d5">
+        <img src="./public/img/categorias/tequila.jpg" alt="Tequila" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Tequila</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20vinos%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d1">
+        <img src="./public/img/categorias/vino.jpg" alt="Vinos" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Vinos</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20champagnes%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d2">
+        <img src="./public/img/categorias/champagne.jpg" alt="Champagne" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Champagne</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20piscos%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d3">
+        <img src="./public/img/categorias/pisco.jpg" alt="Pisco" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Pisco</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20energizantes%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d4">
+        <img src="./public/img/categorias/energizante.jpg" alt="Energizante" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Energizante</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+      <a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20licores%20disponibles%20y%20sus%20precios." target="_blank" class="cat-card reveal d5">
+        <img src="./public/img/categorias/licores.jpg" alt="Licores" loading="lazy">
+        <div class="cat-overlay"><div class="cat-name">Licores</div><div class="cat-cta">Ver precios →</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS DESTACADOS -->
+<section id="productos" class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal" style="margin-bottom:12px;">Productos destacados</p>
+      <h2 class="silver-text reveal d1">Los más pedidos</h2>
+      <p class="reveal d2" style="margin-top:14px;">Precios al por mayor. Consulta disponibilidad y combos del día por WhatsApp.</p>
+    </div>
+    <div class="prod-grid">
+
+      <div class="prod-card reveal d1">
+        <div class="prod-img"><img src="./public/img/categorias/whisky.jpg" alt="Old Time Whisky" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Whisky</div>
+          <div class="prod-name">Old Time 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 20.70 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 248.40</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Old%20Time%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d2">
+        <div class="prod-img"><img src="./public/img/categorias/whisky.jpg" alt="Johnnie Walker Red" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Whisky</div>
+          <div class="prod-name">Johnnie Walker Red Label 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 38.70 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 464.40</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Johnnie%20Walker%20Red%20Label%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d3">
+        <div class="prod-img"><img src="./public/img/categorias/whisky.jpg" alt="Johnnie Walker Black" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Whisky</div>
+          <div class="prod-name">Johnnie Walker Black Label 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 91.80 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 1,101.60</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Johnnie%20Walker%20Black%20Label%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d4">
+        <div class="prod-img"><img src="./public/img/categorias/ron.jpg" alt="Flor de Caña 7 Años" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Ron</div>
+          <div class="prod-name">Flor de Caña 7 Años 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 51.80 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 622.10</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Flor%20de%20Ca%C3%B1a%207%20A%C3%B1os%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d1">
+        <div class="prod-img"><img src="./public/img/categorias/Gin.png" alt="Beefeater Pink" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Gin</div>
+          <div class="prod-name">Beefeater Pink Strawberry 700ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 73.40 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Precio por unidad</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Beefeater%20Pink%20Strawberry%20700ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d2">
+        <div class="prod-img"><img src="./public/img/categorias/vodka.jpg" alt="Smirnoff Apple" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Vodka</div>
+          <div class="prod-name">Smirnoff Apple 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 27.00 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x6: S/ 162.00</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Smirnoff%20Apple%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d3">
+        <div class="prod-img"><img src="./public/img/categorias/licores.jpg" alt="Baileys" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Licores</div>
+          <div class="prod-name">Baileys Original 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 56.70 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 680.40</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Baileys%20Original%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="prod-card reveal d4">
+        <div class="prod-img"><img src="./public/img/categorias/whisky.jpg" alt="Jack Daniels" loading="lazy"></div>
+        <div class="prod-info">
+          <div class="prod-cat">Whisky</div>
+          <div class="prod-name">Jack Daniel's Black 750ml</div>
+          <div class="prod-prices">
+            <div class="prod-unit">S/ 81.00 <span style="font-size:.78rem;color:var(--muted);font-weight:400;">/ unidad</span></div>
+            <div class="prod-box">Caja x12: S/ 972.00</div>
+          </div>
+          <a href="https://wa.me/51970820056?text=Hola,%20quiero%20comprar%20Jack%20Daniel%27s%20Black%20750ml.%20%C2%BFTienen%20stock?" target="_blank" class="prod-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Pedir por WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="reveal">
+      <a href="https://wa.me/51970820056?text=Hola,%20quisiera%20ver%20el%20cat%C3%A1logo%20completo%20de%20licores%20con%20precios%20mayoristas." target="_blank" class="btn btn-ghost">
+        Ver catálogo completo por WhatsApp
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios" class="section" style="background:var(--ink);">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow reveal" style="margin-bottom:12px;">Por qué elegirnos</p>
+      <h2 class="silver-text reveal d1">¿Por qué Perla Negra?</h2>
+      <p class="reveal d2" style="margin-top:14px;">Distribuimos directo para que tu negocio siempre tenga stock al mejor precio.</p>
+    </div>
+    <div class="ben-grid">
+      <div class="ben-card reveal d1">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="ben-title">Precios mayoristas</div>
+        <div class="ben-text">Ofertas especiales para licorerías, bares, restaurantes y eventos. Compra por unidad, docena o caja.</div>
+      </div>
+      <div class="ben-card reveal d2">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="ben-title">Envíos rápidos</div>
+        <div class="ben-text">Delivery en Lima el mismo día. Coordinación directa para despacho a provincias en todo el Perú.</div>
+      </div>
+      <div class="ben-card reveal d3">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ben-title">Productos originales</div>
+        <div class="ben-text">Catálogo seleccionado de marcas reconocidas y garantizadas. Whisky, ron, vodka, gin, tequila y más.</div>
+      </div>
+      <div class="ben-card reveal d4">
+        <div class="ben-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="ben-title">Atención 24/7</div>
+        <div class="ben-text">Pedidos por WhatsApp todos los días, a toda hora. Respuesta rápida y asesoramiento personalizado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" class="section-sm">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num gold-text"><span class="counter" data-target="10">0</span>+</div>
+        <div class="stat-label">Categorías de licores</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num gold-text"><span class="counter" data-target="35">0</span>+</div>
+        <div class="stat-label">Marcas disponibles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num gold-text"><span class="counter" data-target="24">0</span>/7</div>
+        <div class="stat-label">Atención por WhatsApp</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num gold-text"><span class="counter" data-target="2">0</span></div>
+        <div class="stat-label">Teléfonos de contacto</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAYORISTA -->
+<section id="mayorista" class="section">
+  <div class="container">
+    <div class="mayorista-inner">
+      <div class="mayorista-text reveal-left">
+        <p class="eyebrow" style="margin-bottom:14px;">Para tu negocio</p>
+        <h2 class="silver-text">¿Eres licorería, bar o restaurante?</h2>
+        <p style="margin-top:16px;">Trabajamos con negocios de todos los tamaños. Precios especiales por volumen, pago al contado o crédito, y despacho coordinado según tus necesidades.</p>
+        <ul class="mayorista-steps">
+          <li class="mayorista-step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <b>Escríbenos por WhatsApp</b>
+              <span>Cuéntanos qué productos necesitas y en qué cantidad.</span>
+            </div>
+          </li>
+          <li class="mayorista-step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <b>Recibe tu cotización</b>
+              <span>Te enviamos precios mayoristas al instante con disponibilidad de stock.</span>
+            </div>
+          </li>
+          <li class="mayorista-step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <b>Confirmamos y despachamos</b>
+              <span>Coordinas el pago y programamos la entrega a tu local.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="mayorista-card reveal-right">
+        <div class="eyebrow" style="margin-bottom:12px;">Precio especial mayorista</div>
+        <h3>Cotiza ahora</h3>
+        <p>Envíanos tu lista de productos y te respondemos con los mejores precios.</p>
+        <div class="mayorista-tags">
+          <span class="tag">Licorerías</span>
+          <span class="tag">Bares</span>
+          <span class="tag">Restaurantes</span>
+          <span class="tag">Eventos</span>
+          <span class="tag">Hoteles</span>
+        </div>
+        <a href="https://wa.me/51970820056?text=Hola,%20soy%20un%20negocio%20y%20quisiera%20cotizar%20licores%20al%20por%20mayor.%20Me%20pueden%20dar%20precios%20mayoristas?" target="_blank" class="btn btn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Pedir cotización mayorista
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-info reveal-left">
+        <p class="eyebrow" style="margin-bottom:12px;">Contáctanos</p>
+        <h2 class="silver-text">Hablemos de tu pedido</h2>
+        <p style="margin-top:12px;">Atendemos todos los días, las 24 horas. La forma más rápida es WhatsApp.</p>
+        <div style="margin-top:36px;">
+          <div class="contacto-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4 2 2 0 0 1 3.6 2.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.09 6.09l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
+            </div>
+            <div>
+              <div class="cd-label">WhatsApp / Teléfono</div>
+              <div class="cd-value">+51 970 820 056</div>
+              <div class="cd-value">+51 948 778 362</div>
+            </div>
+          </div>
+          <div class="contacto-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="cd-label">Dirección</div>
+              <div class="cd-value">Jr. Callería 410, Manantay<br>Pucallpa, Perú</div>
+            </div>
+          </div>
+          <div class="contacto-detail">
+            <div class="cd-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="cd-label">Horario</div>
+              <div class="cd-value">Todos los días · 24 horas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contacto-form reveal-right">
+        <h3>Hacer un pedido</h3>
+        <p class="form-sub">Déjanos tu nombre y qué necesitas. Te responderemos por WhatsApp.</p>
+        <div class="form-group">
+          <label>Tu nombre</label>
+          <input type="text" id="fname" placeholder="Ej: Carlos Rodríguez">
+        </div>
+        <div class="form-group">
+          <label>Tu teléfono</label>
+          <input type="tel" id="fphone" placeholder="Ej: 987 654 321">
+        </div>
+        <div class="form-group">
+          <label>¿Qué necesitas?</label>
+          <textarea id="fmsg" placeholder="Ej: Necesito 2 cajas de Whisky JW Red Label y precios de Ron Flor de Caña..."></textarea>
+        </div>
+        <button class="form-submit" id="formSubmit">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="./public/img/logo.png" alt="Perla Negra" onerror="this.style.display='none'">
+      <p>Distribuidora de licores al por mayor y menor. Whisky, Ron, Vodka, Gin, Tequila, Champagne, Vinos, Pisco y más.<br>Delivery en Lima · Envíos a todo el Perú.</p>
+      <p class="footer-disclaimer">Venta exclusiva para mayores de 18 años. Beber con responsabilidad.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Catálogo</h4>
+      <ul>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20whiskies%20disponibles." target="_blank">Whisky</a></li>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20vodkas%20disponibles." target="_blank">Vodka</a></li>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20rones%20disponibles." target="_blank">Ron</a></li>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20gins%20disponibles." target="_blank">Gin</a></li>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20tequilas%20disponibles." target="_blank">Tequila</a></li>
+        <li><a href="https://wa.me/51970820056?text=Hola,%20quiero%20ver%20los%20vinos%20disponibles." target="_blank">Vinos</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li>+51 970 820 056</li>
+        <li>+51 948 778 362</li>
+        <li>Jr. Callería 410</li>
+        <li>Manantay, Pucallpa</li>
+        <li>Atención 24/7</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Perla Negra. Todos los derechos reservados.</p>
+    <div class="footer-socials">
+      <a href="https://wa.me/51970820056" target="_blank" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/51970820056?text=Hola,%20quisiera%20informaci%C3%B3n%20sobre%20sus%20licores%20y%20precios." target="_blank" class="wa-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.549 4.08 1.509 5.8L0 24l6.376-1.481A11.946 11.946 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.374l-.359-.213-3.785.879.924-3.685-.234-.378A9.784 9.784 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+// ── Nav scroll ──
+(function() {
+  const nav = document.getElementById('nav');
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+  toggle && toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+  links && links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+})();
+
+// ── Scroll-video hero ──
+(function() {
+  const video = document.getElementById('heroVideo');
+  const hero  = document.getElementById('scroll-hero');
+  const fill  = document.getElementById('progressFill');
+  if (!video || !hero) return;
+
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (isMobile || reduced) {
+    video.autoplay = true;
+    video.loop     = true;
+    video.play().catch(() => {});
+    return;
+  }
+
+  video.pause();
+  video.currentTime = 0;
+  let ready = false;
+  video.addEventListener('loadedmetadata', () => { ready = true; });
+  video.load();
+
+  let ticking = false;
+  function update() {
+    if (!ready || !video.duration) return;
+    const rect = hero.getBoundingClientRect();
+    const scrolled   = -rect.top;
+    const scrollable = hero.offsetHeight - window.innerHeight;
+    if (scrolled <= 0) {
+      video.currentTime = 0;
+      if (fill) fill.style.width = '0%';
+      return;
+    }
+    if (scrolled >= scrollable) {
+      video.currentTime = video.duration;
+      if (fill) fill.style.width = '100%';
+      return;
+    }
+    const p = scrolled / scrollable;
+    video.currentTime = p * video.duration;
+    if (fill) fill.style.width = (p * 100) + '%';
+  }
+  window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+  }, { passive: true });
+  window.addEventListener('resize', update);
+})();
+
+// ── Intersection Observer (reveal) ──
+(function() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+})();
+
+// ── Counter animation ──
+(function() {
+  const counters = document.querySelectorAll('.counter');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      const target = parseInt(el.dataset.target, 10);
+      const duration = 1200;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => obs.observe(c));
+})();
+
+// ── Contact form → WhatsApp ──
+(function() {
+  const btn = document.getElementById('formSubmit');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const name  = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const msg   = document.getElementById('fmsg').value.trim();
+    if (!name && !msg) { alert('Por favor, escribe tu nombre y lo que necesitas.'); return; }
+    let text = 'Hola, me llamo ' + (name || 'un cliente') + '.';
+    if (phone) text += ' Mi teléfono es ' + phone + '.';
+    if (msg)   text += ' Necesito: ' + msg;
+    window.open('https://wa.me/51970820056?text=' + encodeURIComponent(text), '_blank');
+  });
+})();
+</script>
+</body>
+</html>
