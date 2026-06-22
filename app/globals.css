@@ -173,7 +173,7 @@ header{position:sticky; top:0; z-index:100; background:rgba(238,242,249,0.85); b
 .pcard:hover{transform:translateY(-4px); border-color:var(--blue); box-shadow:var(--shadow);}
 .pthumb{position:relative; aspect-ratio:1/1; background:linear-gradient(160deg,#EBEFF7 0%,#DBE2EF 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; overflow:hidden;}
 .pthumb::before{content:""; position:absolute; inset:0; background-image:repeating-linear-gradient(125deg,rgba(18,38,71,0.03) 0 1px,transparent 1px 9px);}
-.pthumb.has-photo{background:#F4F6FB;}
+.pthumb.has-photo{background:#fff;}
 .pthumb.has-photo::before{display:none;}
 .pthumb .pphoto{position:relative; width:100%; height:100%; object-fit:contain; padding:12px;}
 .pthumb .bottle{width:44px; height:96px; border-radius:8px 8px 6px 6px; position:relative; background:linear-gradient(100deg,#16294e,#34528f 55%,#16294e); border:1px solid rgba(18,38,71,0.18); box-shadow:0 8px 18px -8px rgba(18,38,71,0.5);}
