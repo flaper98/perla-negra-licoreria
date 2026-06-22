@@ -59,6 +59,17 @@ export default function Header() {
         <a href="/categoria/whisky" onClick={() => setMenuOpen(false)}>Catálogo</a>
         <a href="/#mayorista" onClick={() => setMenuOpen(false)}>Mayorista</a>
         <a href="/#contacto" onClick={() => setMenuOpen(false)}>Contacto</a>
+
+        {/* Region toggle — solo visible en mobile */}
+        <div className="mob-region region-toggle">
+          <button className={cur === "Lima" ? "active" : ""} onClick={() => { changeRegion("Lima"); setMenuOpen(false); }}>Lima</button>
+          <button className={cur === "Provincia" ? "active" : ""} onClick={() => { changeRegion("Provincia"); setMenuOpen(false); }}>Provincias</button>
+        </div>
+
+        {/* WA — solo visible en mobile */}
+        <a className="mob-wa btn btn-wa" href={waLink(cur)} target="_blank" rel="noopener" onClick={() => setMenuOpen(false)} style={{ marginTop: "4px" }}>
+          <WaSvg /> Pedir por WhatsApp
+        </a>
       </div>
     </>
   );
