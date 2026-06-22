@@ -175,8 +175,9 @@ header{position:sticky; top:0; z-index:100; background:rgba(238,242,249,0.85); b
 .pthumb::before{content:""; position:absolute; inset:0; background-image:repeating-linear-gradient(125deg,rgba(18,38,71,0.03) 0 1px,transparent 1px 9px);}
 .pthumb.has-photo{background:#fff;}
 .pthumb.has-photo::before{display:none;}
-.pthumb .pphoto{position:relative; width:100%; height:100%; object-fit:contain; padding:12px; opacity:0; transition:opacity .4s ease;}
-.pthumb .pphoto.loaded{opacity:1;}
+.pthumb.shimmer{background:linear-gradient(90deg,#eef1f7 25%,#e2e7f0 50%,#eef1f7 75%); background-size:200% 100%; animation:pshimmer 1.3s ease-in-out infinite;}
+.pthumb .pphoto{position:relative; width:100%; height:100%; object-fit:contain; padding:12px;}
+@keyframes pshimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .pthumb .bottle{width:44px; height:96px; border-radius:8px 8px 6px 6px; position:relative; background:linear-gradient(100deg,#16294e,#34528f 55%,#16294e); border:1px solid rgba(18,38,71,0.18); box-shadow:0 8px 18px -8px rgba(18,38,71,0.5);}
 .pthumb .bottle::before{content:""; position:absolute; top:-13px; left:50%; transform:translateX(-50%); width:14px; height:14px; background:#16294e; border:1px solid rgba(18,38,71,0.18); border-bottom:0; border-radius:3px 3px 0 0;}
 .pthumb .pl-cat{position:relative; font-family:var(--font-space-mono); font-size:0.6rem; letter-spacing:0.18em; color:var(--silver-2); text-transform:uppercase; margin-top:6px;}

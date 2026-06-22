@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsapp from "@/components/FloatingWhatsapp";
@@ -40,8 +40,8 @@ function splitNameVol(fullName) {
   return m ? { name: m[1], vol: m[2] } : { name: fullName, vol: null };
 }
 
-function ProductCard({ p, region }) {
-  const [loaded, setLoaded] = useState(false);
+function ProductCard({ p, region, priority }) {
+  const [imgLoaded, setImgLoaded] = useState(false);
   const cur = region || "Lima";
   const num = WA[cur] || WA.Lima;
   const { name: displayName, vol } = splitNameVol(p.name);
@@ -51,17 +51,18 @@ function ProductCard({ p, region }) {
 
   return (
     <div className="pcard">
-      <div className={`pthumb${hasPhoto ? " has-photo" : ""}`}>
+      <div className={`pthumb${hasPhoto ? " has-photo" : ""}${hasPhoto && !imgLoaded ? " shimmer" : ""}`}>
         {p.badge && <span className="pbadge">Oferta</span>}
         {hasPhoto ? (
           <img
-            className={`pphoto${loaded ? " loaded" : ""}`}
+            className="pphoto"
             src={p.image}
             alt={p.name}
-            loading="lazy"
-            decoding="async"
-            onLoad={() => setLoaded(true)}
-            onError={() => setLoaded(true)}
+            loading={priority ? "eager" : "lazy"}
+            decoding={priority ? "sync" : "async"}
+            fetchpriority={priority ? "high" : "low"}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgLoaded(true)}
           />
         ) : (
           <>
@@ -164,7 +165,7 @@ export default function CategoryPageClient({ params }) {
               </div>
             ) : (
               list.map((p, i) => (
-                <ProductCard key={i} p={p} region={cur} />
+                <ProductCard key={i} p={p} region={cur} priority={i < 8} />
               ))
             )}
           </div>
