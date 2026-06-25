@@ -62,7 +62,6 @@ export const products = [
   // PISCO
   { name: "Santiago Queirolo Quebranta 750ml", category: "Pisco", unitPrice: "S/ 27.00", image: "/img/products/pisco/Santiago_Queirolo_Quebranta_750ml.png", badge: true },
   { name: "Santiago Queirolo Acholado 750ml", category: "Pisco", unitPrice: "S/ 27.00", image: "/img/products/pisco/Santiago_Queirolo_Acholado_750ml.png", badge: true },
-  { name: "Flor de Caña el Porton", category: "Pisco", unitPrice: "S/ 90.00", image: "/img/products/pisco/Flor_de_Caña_el_Porton.png", badge: true },
   // TEQUILA
   { name: "Tequila Jose Cuervo 750ml", category: "Tequila", unitPrice: "S/ 56.70", image: "/img/products/tequila/Tequila_Jose_Cuervo_750ml.png", badge: true },
   { name: "1800 Tequila Reserva 750ml", category: "Tequila", unitPrice: "S/ 97.20", image: "/img/products/tequila/1800_Tequila_Reserva_750ml.png", badge: true },
@@ -71,7 +70,6 @@ export const products = [
     { name: "Red Bull 250ml", category: "Energizantes", unitPrice: "S/ 7.00", image: "/img/products/energizantes/Red_Bull_250ml.png", badge: true },
   //LICORES
   { name: "Baileys Original 750ml", category: "Licores", unitPrice: "S/ 56.70", image: "/img/products/licores/Baileys_Original_750ml.png", badge: true },
-  { name: "Jigger 750ml", category: "Licores", unitPrice: "S/ 65.00", image: "/img/products/licores/jigger_750ml.png", badge: true },
 
   // RON
   { name: "Cartavio Blanco 750ml", category: "Ron", unitPrice: "S/ 24.00", image: "/img/products/ron/Cartavio_Blanco_750ml.png", badge: true },
